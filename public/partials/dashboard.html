@@ -2,24 +2,25 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<h3 class="text-left">
-				   {{ profile.username }}
-			</h3><img alt="User Avatar" src="images/default_avatar.png" />
-				<p>{{ profile.userAddress }}</p>
-				<p>{{ profile.userPhone }}</p>
-				<p>
-					{{ profile.userDescription }}
-				</p>
-				<button class="btn btn-primary btn-lg" ng-click="newListing()">Create New Listing</button>
+				<div class="jumbotron profileBox">
+					<div class="profileLeft"><img class="profileAvatar" alt="User Avatar" src="images/default_avatar.png" /></div>
+					<div class="profileInfo">
+						<h2 class="text-left">{{ profile.userFullName }}</h2>
+						<p><span class="glyphicon glyphicon-map-marker"></span> {{ profile.userAddressStreet }}, {{ profile.userAddressCity }},
+							{{ profile.userAddressCountry }}, {{ profile.userAddressPostal }}</p>
+						<p><span class="glyphicon glyphicon-earphone"></span> {{ profile.userPhone }}</p>
+						<p>{{ profile.userDescription }}</p>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="row">
-					<div class="col-md-4" ng-repeat="job in jobs | startFrom:cPage*pSize | limitTo:pSize"">
-						<div class="thumbnail">
-							<img alt="Listing Picture" src="http://lorempixel.com/output/people-q-c-600-200-1.jpg" />
-							<div class="caption">
+					<div class="col-md-4" ng-repeat="job in jobs | startFrom:cPage*pSize | limitTo:pSize" ">
+						<div class="thumbnail ">
+							<img alt="Listing Picture " src="http://lorempixel.com/output/people-q-c-600-200-1.jpg " />
+							<div class="caption ">
 								<h3>
 								{{ job.jobTitle }}
 							</h3>
@@ -27,21 +28,23 @@
 									{{ job.jobDescription }}
 								</p>
 								<p>
-									<a class="btn btn-primary" href>View</a> <a class="btn" href>Delete</a>
+									<a class="btn btn-primary " ng-click="viewListing(job.id) " href>View</a> 
+									<a class="btn " ng-click="deleteListing(job.id)" ng-confirm-click="You are about to delete your listing! Are you sure you want to do this?" href>Delete</a>
 								</p>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div>
-					<button class="btn btn-primary btn-lg" ng-disabled="cPage == 0" ng-click="cPage=cPage-1">
-					<span class="glyphicon glyphicon-chevron-left"></span>
+				<div class="listingButtons ">
+					<button class="btn btn-primary btn-lg " id="newJobBtn " ng-click="newListing() " ng-show="loggedIn ">Create New Listing</button>
+					<button class="btn btn-primary btn-lg " ng-disabled="cPage==0 " ng-click="cPage=cPage-1 ">
+					<span class="glyphicon glyphicon-chevron-left "></span>
 					</button>
-					<button class="btn btn-primary btn-lg" ng-disabled="cPage >= jobs.length/pSize - 1" ng-click="cPage=cPage+1">
-					<span class="glyphicon glyphicon-chevron-right"></span>
-					</button>
+					<button class="btn btn-primary btn-lg " ng-disabled="cPage>= jobs.length/pSize - 1" ng-click="cPage=cPage+1">
+						<span class="glyphicon glyphicon-chevron-right"></span>
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>

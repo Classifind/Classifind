@@ -8,11 +8,11 @@
             <div class="panel-body">
               <div class="form-group">
                 <label for="title">Title:</label>
-                <input type="text" class="form-control" id="title" ng-model="listingTitle">
+                <input type="text" class="form-control" id="title" ng-model="listingTitle" required>
               </div>
               <div class="form-group">
                   <label for="category">Category:</label>
-                  <select class="form-control" id="category" ng-model="listingCategory">
+                  <select class="form-control" id="category" ng-model="listingCategory" required>
                     <option>Home Renovation</option>
                     <option>Technology</option>
                     <option>Automotive</option>
@@ -23,7 +23,7 @@
                 </div>
               <div class="form-group">
                 <label for="comment">Description:</label>
-                <textarea class="form-control" rows="5" id="desc" ng-model="listingDesc"></textarea>
+                <textarea class="form-control" rows="5" id="desc" ng-model="listingDesc" required></textarea>
               </div>
             </div>
           </div>
@@ -35,19 +35,19 @@
                 <div class="form-group">
                   <!-- <input id="advanced-placepicker" class="form-control" data-map-container-id="collapseOne" /> -->
                   <label for="street">Street:</label>
-                  <input type="text" id="street" class="form-control" ng-model="listingStreet">
+                  <input type="text" id="street" class="form-control" ng-value="listingStreet" ng-model="listingStreet" required>
                 </div>
                 <div class="form-group">
                   <label for="city">City:</label>
-                  <input type="text" id="city" class="form-control" ng-model="listingCity">
+                  <input type="text" id="city" class="form-control" ng-value="listingCity" ng-model="listingCity" required>
                 </div>
                 <div class="form-group">
                   <label for="postal">Postal:</label>
-                  <input type="text" id="postal" class="form-control" ng-model="listingPostal">
+                  <input type="text" id="postal" class="form-control" ng-value="listingPostal" ng-model="listingPostal" required>
                 </div>
                 <div class="form-group">
                   <label for="country">Country:</label>
-                  <select class="form-control" id="country" ng-model="listingCountry">
+                  <select class="form-control newListingCountry" id="country" ng-model="listingCountry" required>
                     <option>Canada</option>
                     <option>United States</option>
                     <option>United Kingdom</option>

@@ -122,6 +122,12 @@ text-align: center;
 	margin-top: 12px;
 }
 
+.welcome-message {
+    color: white;
+    padding: 0 15px;
+    font-size: 16px;
+}
+
 @media screen and (max-width: 1081px) {
     .navbar .navbar-collapse .navbar-right > li:last-child { padding-left: 15px; padding-right: 15px; } 
     

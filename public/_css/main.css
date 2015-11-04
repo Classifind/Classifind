@@ -42,3 +42,111 @@ footer {
     margin-top: 20px;
     padding-bottom: 20px;
 }
+
+.profileLeft {
+  float: left;
+  width: 25%;
+}
+
+.profileInfo {
+    float: left;
+    padding: 0 40px;
+    width: 60%;
+}
+
+.profileBox button {
+  float: none;
+  
+}
+
+.profileBox {
+  display: inline-block;
+  width: 100%;
+}
+
+.profileBox h2 {
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.listingButtons {
+  text-align: right; 
+}
+
+#newJobBtn {
+  font-size: 14px;
+}
+
+.profileBox p {
+  font-size: 14px;
+}
+
+.profileBox .glyphicon {
+  font-size: 14px;
+}
+
+.thumbSmall {
+  width: 32%;
+}
+
+.thumbLarge {
+  width: 100%;
+}
+
+.thumbs {
+  text-align: center;
+  margin-top: 5px;
+}
+
+.profileAvatar {
+  width: 100%;
+}
+
+.requestorAvatar {
+  width: 60px;
+}
+
+.requestorInfo {
+  margin-top: 15px;
+  text-align: right;
+}
+
+.requestorName {
+  font-weight: bold;
+  font-size: 18px;
+  padding-left: 5px;  
+}
+
+.tags li a {
+  padding: 0 5px; 
+}
+
+.listingBox p {
+  font-size: 14px;
+}
+
+.listingBox h3 {
+  margin-top: 0;
+}
+
+.pastBids h3 {
+  margin: 0;
+}
+
+.bidRow {
+  padding-top: 50px;
+}
+
+.bidderName {
+  font-weight: bold;
+  font-size: 18px;
+  padding-left: 10px;  
+}
+
+.pastBids tbody tr td {
+  vertical-align: middle;
+}
+
+.listingButtons {
+  text-align: right;
+}

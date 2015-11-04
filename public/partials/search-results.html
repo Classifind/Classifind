@@ -1,6 +1,6 @@
 <div class="wrap">
     <div class="container">
-        <hgroup class="mb20">
+        <hgroup class="mb20 searchHeader">
             <h1>Search Results</h1>
             <h2 class="lead"><strong class="text-danger">{{ dataLength }}</strong> results were found</h2>
         </hgroup>
@@ -8,7 +8,7 @@
         <section class="col-xs-12 col-sm-6 col-md-12">
             <article class="search-result row" ng-repeat="r in searchResults | orderBy: '-jobPostingDate'">
                 <div class="col-xs-12 col-sm-12 col-md-3">
-                    <a href="#" title="Lorem ipsum" class="thumbnail"><img src="images/empty.png" alt="picture" /></a>
+                    <a href="#" title="Lorem ipsum" class="thumbnail"><img class="searchPicture" src="http://lorempixel.com/g/244/137/" alt="picture" /></a>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-2">
                     <ul class="meta-search">

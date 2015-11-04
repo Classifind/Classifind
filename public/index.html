@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="_css/nav.css" />
 	<link rel="stylesheet" href="_css/home.css" />
 	<link rel="stylesheet" href="_css/main.css" />
+	<link rel="stylesheet" href="_css/search.css" />
 	<base href="/">
 </head>
 
@@ -27,7 +28,7 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="navbar-collapse-2">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href ng-click="profile()"><span class="glyphicon glyphicon-user icon"></span><br class="iconline">Dashboard</a></li>
+						<li ng-show="loggedIn"><a href ng-click="profile()"><span class="glyphicon glyphicon-user icon"></span><br class="iconline">Dashboard</a></li>
 						<li><a href ng-click="getJobs()"><span class="glyphicon glyphicon-pushpin icon"></span><br class="iconline">Listings</a></li>
 						<li><a href="#search"><span class="glyphicon glyphicon-search icon"></span><br class="iconline">Search</a></li>
 						<li>
@@ -46,13 +47,14 @@
 								<input type="password" class="form-control" id="Password" placeholder="Password" ng-model="userPassword" required />
 							</div>
 							<button type="submit" class="btn btn-success" ng-click="login()">GO</button>
-							<button type="button" class="btn btn-success" ng-click="go('/register')">Register</button>
+							<button type="button" class="btn btn-success" ng-click="register()">Register</button>
 						</form>
 						<form class="navbar-form navbar-right form-inline" role="form" ng-show="loggedIn">
 							<div class="form-group">
-								<label class="sr-only" for="logout">Welcome {{ username }}</label>
+								<label class="sr-only" for="logout">Welcome {{ userName }}</label>
+								<span class="welcome-message">Welcome {{ userName }}</span>
+								<button type="button" class="btn btn-success" id="logout" ng-click="logout()">Log Out</button>
 							</div>
-							<button type="button" class="btn btn-success" id="logout" ng-click="logout()">Log Out</button>
 						</form>
 					</div>
 				</div>

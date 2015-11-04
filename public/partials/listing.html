@@ -5,66 +5,63 @@
 				<div class="col-md-12">
 					<div class="row">
 						<div class="col-md-8">
-							<h3>
-							{{ listingInformation.jobTitle }}
-					</h3>
-							<address>
-						 <strong>Twitter, Inc.</strong><br /> 795 Folsom Ave, Suite 600<br /> San Francisco, CA 94107<br /> <abbr title="Phone">P:</abbr> (123) 456-7890
-					</address>
-							<p>
-								{{ listingInformation.jobDescription }}
-							</p>
-							<ul class="nav nav-pills">
-								<li class="active">
-									<a href> <span class="badge pull-right">{{ listingInformation.jobCategory }}<span></a>
-								</li>
-							</ul>
+							<div class="jumbotron listingBox">
+								<h3>
+								{{ listingInformation.jobTitle }}
+							</h3>
+								<p><span class="glyphicon glyphicon-map-marker"></span> {{ listingInformation.jobAddressStreet }}, {{ listingInformation.jobAddressCity }}, {{ listingInformation.jobAddressCountry }}, {{ listingInformation.jobAddressPostal }}</p>
+								<p>
+									{{ listingInformation.jobDescription }}
+								</p>
+								<ul class="nav nav-pills tags">
+									<li class="active">
+										<a href ng-click="searchCategory(listingInformation.jobCategory)" class="btn btn-primary btn-xs">{{ listingInformation.jobCategory }}</a>
+									</li>
+								</ul>
+							<div class="row">
+								<div class="col-md-12 requestorInfo">
+									<img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/people" class="img-circle requestorAvatar" />
+									<a href ng-click="getProfile(listingInformation.requestorId)"><span class="requestorName">{{ requestor }}</span></a>
+								</div>
+							</div>
+						</div>
 						</div>
 						<div class="col-md-4">
 							<div class="row">
-								<div class="col-md-4">
-									<img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/" class="img-thumbnail" />
-								</div>
-								<div class="col-md-4">
-									<img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/" class="img-thumbnail" />
-								</div>
-								<div class="col-md-4">
-									<img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/" class="img-thumbnail" />
-								</div>
-							</div>
-							<div class="row">
 								<div class="col-md-12">
+									<img alt="Bootstrap Image Preview" src="http://lorempixel.com/420/420/abstract" class="img-thumbnail thumbLarge" />
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-md-4">
-									<img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/" class="img-circle" />
-								</div>
-								<div class="col-md-8">
-									<h3>
-								{{ requestor }}
-							</h3>
-								</div>
+								<div class="col-md-12 thumbs">
+									<img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/sports" class="img-thumbnail thumbSmall" />
+									<img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/business" class="img-thumbnail thumbSmall" />
+									<img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/nightlife" class="img-thumbnail thumbSmall" />
+								</div>	
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-4">
-					<h3 ng-repeat="bid in bidList">
-				{{ bid.bidProvider.userFullName }}
-			</h3>
-				</div>
-				<div class="col-md-4">
-				</div>
-				<div class="col-md-4">
-					<h3 class="text-danger text-right" ng-repeat="bid in bidList">
-				${{ bid.bidPrice }} <small>{{ bid.bidDate | date:'MM/dd/yyyy' }}</small>
-			</h3>
+			<div class="row bidRow">
+				<div class="col-md-12">
+					<table class="table table-striped pastBids">
+						<tr ng-repeat="bid in bidList | orderBy: 'bidPrice'">
+							<td>
+								<h3>
+									<img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/people" class="img-circle requestorAvatar" /><a href ng-click="getProfile(bid.bidProvider.id)"><span class="bidderName">{{ bid.bidProvider.userFullName }}</span></a>
+								</h3>
+							</td>
+							<td>
+								<h3 class="text-success text-right">
+									{{ bid.bidPrice | currency }} <small>{{ bid.bidDate | date:'MM/dd/yyyy' }}</small>
+								</h3>
+							</td>
+						</tr>
+					</table>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row listingButtons">
 				<div class="col-md-12">
 					<button class="btn btn-primary btn-lg" ng-click="newBid(listingID)">Submit New Bid</button>
 				</div>
