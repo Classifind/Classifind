@@ -17,9 +17,9 @@
                     </ul>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
-                    <h3><a href title="">{{ r.jobTitle }}</a></h3>
+                    <h3><a href ng-click="openListing(r.id)">{{ r.jobTitle }}</a></h3>
                     <p>{{ r.jobDescription }}</p>
-                    <span class="plus"><a href="#" title="Lorem ipsum"><i class="glyphicon glyphicon-plus"></i></a></span>
+                    <span class="plus"><a href title="Lorem ipsum" ng-click="openListing(r.id)"><i class="glyphicon glyphicon-plus"></i></a></span>
                 </div>
                 <span class="clearfix borda"></span>
             </article>

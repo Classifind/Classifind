@@ -8,11 +8,22 @@
             <div class="panel-body">
               <div class="form-group">
                 <label for="title">Title:</label>
-                <input type="text" class="form-control" id="title">
+                <input type="text" class="form-control" id="title" ng-model="listingTitle">
               </div>
               <div class="form-group">
+                  <label for="category">Category:</label>
+                  <select class="form-control" id="category" ng-model="listingCategory">
+                    <option>Home Renovation</option>
+                    <option>Technology</option>
+                    <option>Automotive</option>
+                    <option>Creative</option>
+                    <option>Personal Services</option>
+                    <option>Miscellaneous</option>
+                  </select>
+                </div>
+              <div class="form-group">
                 <label for="comment">Description:</label>
-                <textarea class="form-control" rows="5" id="desc"></textarea>
+                <textarea class="form-control" rows="5" id="desc" ng-model="listingDesc"></textarea>
               </div>
             </div>
           </div>
@@ -21,13 +32,31 @@
           <div class="panel panel-default">
             <div class="panel-heading"><strong>Location</strong></div>
             <div class="panel-body">
-              <div class="form-group">
-                <input id="advanced-placepicker" class="form-control" data-map-container-id="collapseOne" />
-              </div>
-
-              <div id="collapseOne" class="collapse">
+                <div class="form-group">
+                  <!-- <input id="advanced-placepicker" class="form-control" data-map-container-id="collapseOne" /> -->
+                  <label for="street">Street:</label>
+                  <input type="text" id="street" class="form-control" ng-model="listingStreet">
+                </div>
+                <div class="form-group">
+                  <label for="city">City:</label>
+                  <input type="text" id="city" class="form-control" ng-model="listingCity">
+                </div>
+                <div class="form-group">
+                  <label for="postal">Postal:</label>
+                  <input type="text" id="postal" class="form-control" ng-model="listingPostal">
+                </div>
+                <div class="form-group">
+                  <label for="country">Country:</label>
+                  <select class="form-control" id="country" ng-model="listingCountry">
+                    <option>Canada</option>
+                    <option>United States</option>
+                    <option>United Kingdom</option>
+                    <option>Mexico</option>
+                  </select>
+                </div>
+              <!--<div id="collapseOne" class="collapse">
                 <div class="placepicker-map thumbnail"></div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -66,14 +95,14 @@
           <div class="js-upload-finished">
             <h3>Processed files</h3>
             <div class="list-group">
-              <a href="#" class="list-group-item list-group-item-success"><span class="badge alert-success pull-right">Success</span>image-01.jpg</a>
-              <a href="#" class="list-group-item list-group-item-success"><span class="badge alert-success pull-right">Success</span>image-02.jpg</a>
+              <a href class="list-group-item list-group-item-success"><span class="badge alert-success pull-right">Success</span>image-01.jpg</a>
+              <a href class="list-group-item list-group-item-success"><span class="badge alert-success pull-right">Success</span>image-02.jpg</a>
             </div>
           </div>
         </div>
       </div>
 
-      <button type="submit" class="btn btn-lg btn-primary btn-block" id="js-listing-submit">Create Listing</button>
+      <button type="submit" class="btn btn-lg btn-primary btn-block" id="js-listing-submit" ng-click="createListing()">Create Listing</button>
 
     </form>
   </div>

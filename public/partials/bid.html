@@ -11,62 +11,45 @@
 							<address>
 						 <strong>Twitter, Inc.</strong><br /> 795 Folsom Ave, Suite 600<br /> San Francisco, CA 94107<br /> <abbr title="Phone">P:</abbr> (123) 456-7890
 					</address>
+							<div class="row">
+								<div class="col-md-4">
+									<img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/" class="img-thumbnail" />
+								</div>
+								<div class="col-md-4">
+									<img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/" class="img-thumbnail" />
+								</div>
+								<div class="col-md-4">
+									<img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/" class="img-thumbnail" />
+								</div>
+							</div>
 							<p>
 								{{ listingInformation.jobDescription }}
 							</p>
-							<ul class="nav nav-pills">
-								<li class="active">
-									<a href> <span class="badge pull-right">{{ listingInformation.jobCategory }}<span></a>
-								</li>
-							</ul>
-						</div>
-						<div class="col-md-4">
 							<div class="row">
-								<div class="col-md-4">
-									<img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/" class="img-thumbnail" />
-								</div>
-								<div class="col-md-4">
-									<img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/" class="img-thumbnail" />
-								</div>
-								<div class="col-md-4">
-									<img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/" class="img-thumbnail" />
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-12">
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-4">
-									<img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/" class="img-circle" />
-								</div>
 								<div class="col-md-8">
-									<h3>
+									<h3 class="text-left">
 								{{ requestor }}
 							</h3>
 								</div>
+								<div class="col-md-4">
+								</div>
 							</div>
 						</div>
+						<div class="col-md-4">
+							<form role="form">
+								<div class="form-group">
+
+									<label for="bidPrice">
+										Offer
+									</label>
+									<input type="number" ng-model="bidPrice" class="form-control" id="bidPrice" />
+								</div>
+								<button type="submit" class="btn btn-default" ng-click="placeBid()">
+									Submit
+								</button>
+							</form>
+						</div>
 					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">
-					<h3 ng-repeat="bid in bidList">
-				{{ bid.bidProvider.userFullName }}
-			</h3>
-				</div>
-				<div class="col-md-4">
-				</div>
-				<div class="col-md-4">
-					<h3 class="text-danger text-right" ng-repeat="bid in bidList">
-				${{ bid.bidPrice }} <small>{{ bid.bidDate | date:'MM/dd/yyyy' }}</small>
-			</h3>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<button class="btn btn-primary btn-lg" ng-click="newBid(listingID)">Submit New Bid</button>
 				</div>
 			</div>
 		</div>
