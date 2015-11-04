@@ -1,0 +1,142 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../_css/bootstrap.min.css" />
+<link rel="stylesheet" href="../_css/nav.css" />
+<link rel="stylesheet" href="../_css/main.css" />
+<link rel="stylesheet" href="../_css/search.css" />
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-2">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand " href="#"><img id="logo" src="images/logo-small.png"></a>
+        </div>
+    
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbar-collapse-2">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><span class="glyphicon glyphicon-pushpin icon"></span><br class="iconline">Listings</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-user icon"></span><br class="iconline">Specialists</a></li>
+            <li>
+                <a href="#search">
+		  <span class="glyphicon glyphicon-search icon"></span><br class="iconline">Search
+		</a>
+	    </li>
+            <li>
+              <a class="btn btn-default btn-outline btn-circle collapsed"  data-toggle="collapse" href="#login-collapse" aria-expanded="false" aria-controls="login-collapse">Sign in</a>
+            </li>
+          </ul>
+          <div class="collapse nav navbar-nav nav-collapse slide-down" id="login-collapse">
+            <form class="navbar-form navbar-right form-inline" role="form">
+              <div class="form-group">
+                <label class="sr-only" for="Email">Email</label>
+                <input type="email" class="form-control" id="Email" placeholder="Email" autofocus required />
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="Password">Password</label>
+                <input type="password" class="form-control" id="Password" placeholder="Password" required />
+              </div>
+              <button type="submit" class="btn btn-success">Sign in</button>
+            </form>
+          </div>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container -->
+    </nav><!-- /.navbar -->
+    
+<div id="search">
+    <button type="button" class="close">×</button>
+    <form>
+        <input type="search" value="" placeholder="type keyword(s) here" />
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>    
+
+<div class="wrap">
+    <div class="container">
+
+        <hgroup class="mb20">
+            <h1>Search Results</h1>
+            <h2 class="lead"><strong class="text-danger">3</strong> results were found for the search for <strong class="text-danger">Babysit</strong></h2>								
+        </hgroup>
+
+        <section class="col-xs-12 col-sm-6 col-md-12">
+            <article class="search-result row">
+                <div class="col-xs-12 col-sm-12 col-md-3">
+                    <a href="#" title="Lorem ipsum" class="thumbnail"><img src="images/stewie.jpg" alt="picture" /></a>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-2">
+                    <ul class="meta-search">
+                        <li><i class="glyphicon glyphicon-time"></i> <span>14 minutes ago</span></li>
+                        <li><i class="glyphicon glyphicon-tags"></i> <span>babysit</span></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
+                    <h3><a href="#" title="">need babysitter</a></h3>
+                    <p>going 2 party ned babysitter friday pls call 123456789</p>						
+                    <span class="plus"><a href="#" title="Lorem ipsum"><i class="glyphicon glyphicon-plus"></i></a></span>
+                </div>
+                <span class="clearfix borda"></span>
+            </article>
+
+            <article class="search-result row">
+                <div class="col-xs-12 col-sm-12 col-md-3">
+                    <a href="#" title="Lorem ipsum" class="thumbnail"><img src="images/empty.png" alt="picture" /></a>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-2">
+                    <ul class="meta-search">
+                        <li><i class="glyphicon glyphicon-time"></i> <span>1 hour ago</span></li>
+                        <li><i class="glyphicon glyphicon-tags"></i> <span>Babysitting</span></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-7">
+                    <h3><a href="#" title="">Need someone to watch my kids</a></h3>
+                    <p>I can't do this anymore, need a break call for details</p>						
+                    <span class="plus"><a href="#" title="Lorem ipsum"><i class="glyphicon glyphicon-plus"></i></a></span>
+                </div>
+                <span class="clearfix borda"></span>
+            </article>
+
+            <article class="search-result row">
+                <div class="col-xs-12 col-sm-12 col-md-3">
+                    <a href="#" title="Lorem ipsum" class="thumbnail"><img src="images/kid.jpg" alt="picture" /></a>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-2">
+                    <ul class="meta-search">
+                        <li><i class="glyphicon glyphicon-time"></i> <span>1 day ago</span></li>
+                        <li><i class="glyphicon glyphicon-tags"></i> <span>babysitter</span></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-7">
+                    <h3><a href="#" title="">profesional babysit</a></h3>
+                    <p>
+                    Im looking for a babysitter to look after my 20 month old and also to pick up my 4 yrs from school call to...
+                    </p>						
+                    <span class="plus"><a href="#" title="Lorem ipsum"><i class="glyphicon glyphicon-plus"></i></a></span>
+                </div>
+                <span class="clearfix border"></span>
+            </article>			
+
+        </section>
+    </div>
+ </div> 
+    
+<footer><div class="copyright">©2015 Classifind. Classifind is a trademark of Team GLASS.</div></footer>
+    
+<script type="text/javascript" src="../_js/jquery.min.js"></script>
+<script src="../_js/bootstrap.min.js"></script>
+<script src="../_js/nav.js"></script>
+<script src="../_js/create-listing.js"></script>
+<script src="../_js/jquery.placepicker.min.js"></script>
+<script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?sensor=true&libraries=places">
+    </script>
+</body>
+</html>
