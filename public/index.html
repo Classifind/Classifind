@@ -1,0 +1,90 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="_css/bootstrap.min.css" />
+	<link rel="stylesheet" href="_css/nav.css" />
+	<link rel="stylesheet" href="_css/home.css" />
+	<link rel="stylesheet" href="_css/main.css" />
+
+</head>
+
+<body ng-app="classifindApp">
+	<div id='main'>
+		<nav class="navbar navbar-inverse" ng-controller="loginController">
+			<div class="container">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-2">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand " href="#"><img id="logo" src="images/logo-small.png"></a>
+				</div>
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="navbar-collapse-2">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href ng-click="profile()"><span class="glyphicon glyphicon-user icon"></span><br class="iconline">Dashboard</a></li>
+						<li><a href ng-click="getJobs()"><span class="glyphicon glyphicon-pushpin icon"></span><br class="iconline">Listings</a></li>
+						<li>
+							<a href="#search">
+								<span class="glyphicon glyphicon-search icon"></span>
+								<br class="iconline">Search
+							</a>
+						</li>
+						<li>
+							<a class="btn btn-default btn-outline btn-circle collapsed" data-toggle="collapse" href="#login-collapse" id="loginToggle"
+							aria-expanded="false" aria-controls="login-collapse">Sign in</a>
+						</li>
+					</ul>
+					<div class="collapse nav navbar-nav nav-collapse slide-down" id="login-collapse">
+						<form class="navbar-form navbar-right form-inline" role="form">
+							<div class="form-group">
+								<label class="sr-only" for="Email">Email</label>
+								<input type="email" class="form-control" id="Email" placeholder="Email" ng-model="userEmail" autofocus required />
+							</div>
+							<div class="form-group">
+								<label class="sr-only" for="Password">Password</label>
+								<input type="password" class="form-control" id="Password" placeholder="Password" ng-model="userPassword" required />
+							</div>
+							<button type="submit" class="btn btn-success" ng-click="login()">GO</button>
+							<button type="button" class="btn btn-success" ng-click="go('/register')">Register</button>
+						</form>
+
+					</div>
+				</div>
+				<!-- /.navbar-collapse -->
+			</div>
+			<!-- /.container -->
+		</nav>
+		<!-- /.navbar -->
+
+		<div id="search" ng-controller="searchController">
+			<button type="button" class="close">×</button>
+			<form ng-submit="showResults(searchQuery)">
+				<input type="search" value="" placeholder="type keyword(s) here" ng-model="searchQuery" />
+				<button type="submit" class="btn btn-primary" ng-click="search()">Search</button>
+			</form>
+		</div>
+
+		<div id="content" ng-view>
+
+		</div>
+	</div>
+	<footer>
+		<div class="copyright">©2015 Classifind. Classifind is a trademark of Team GLASS.</div>
+	</footer>
+
+	<script src="_js/angular.min.js"></script>
+	<script src="_js/angular-route.js"></script>
+	<script src="_js/angular-timeago.js"></script>
+	<script src="_js/app.js"></script>
+	<script src="_js/jquery.min.js"></script>
+	<script src="_js/bootstrap.min.js"></script>
+	<script src="_js/nav.js"></script>
+</body>
+
+</html>

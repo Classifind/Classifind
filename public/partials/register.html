@@ -1,0 +1,74 @@
+<div class="wrap">
+	<div class="container">
+		<form name="registration" enctype="multipart/form-data">
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 col-md-8">
+					<div class="panel panel-default">
+						<div class="panel-heading"><strong>Account Information</strong></div>
+						<div class="panel-body">
+							<div class="form-group">
+								<label for="title">Email:</label>
+								<input type="email" class="form-control" ng-blur="checkEmail" ng-model="userEmail" id="email" required>
+								<div id="emailError"></div>
+							</div>
+							<div class="form-group">
+								<label for="username">Username:</label>
+								<input type="text" class="form-control" ng-model="userName" id="username" required>
+							</div>
+							<div class="form-group">
+								<label for="password">Password:</label>
+								<input type="password" class="form-control" ng-model="userPassword" id="password" required>
+							</div>
+							<!--<div class="form-group">
+								<label for="password-confirm">Confirm Password:</label>
+								<input type="password" class="form-control" name="passwordConfirm" ng-model="passwordConfirm" id="password-confirm" match="password">
+								<div ng-show="registration.passwordConfirm.$error.match">Fields do not match!</div>
+							</div>-->
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6 col-md-4">
+					<div class="panel panel-default">
+						<div class="panel-heading"><strong>Avatar</strong></div>
+						<div class="panel-body">
+							<div id="kv-avatar-errors" class="center-block" style="width:800px;display:none"></div>
+							<div class="kv-avatar center-block" style="width:200px">
+								<input id="avatar" name="avatar" type="file" class="file-loading">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-heading"><strong>Additional Information</strong></div>
+						<div class="panel-body">
+							<!--<div class="input-append date" id="datepicker" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+								<label for="bday">Birthday:</label>
+								<input class="span2" size="16" type="text" value="01-01-2000" id="bday">
+								<span class="add-on"><i class="icon-th"></i></span>
+							</div>-->
+							<div class="form-group">
+								<label for="bio">Biography:</label>
+								<textarea class="form-control" rows="5" ng-model="userBio" id="bio"></textarea>
+							</div>
+							<div class="form-group">
+								<label for="phone">Phone:</label>
+								<input type="text" class="form-control" id="phone" ng-model="userPhone">
+							</div>
+							<div class="form-group">
+								<label for="address">Address:</label>
+								<input type="text" class="form-control" id="address" ng-model="userAddress">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			
+			<button type="submit" class="btn btn-lg btn-primary btn-block" id="js-listing-submit" ng-click="registerUser()">Create Account</button>
+		</form>
+	</div>
+</div>
