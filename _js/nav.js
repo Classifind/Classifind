@@ -13,3 +13,10 @@ $(function () {
     
     
 });
+/*$(document).ready(function() {
+   $("#loginToggle").click(function($) {
+        $("#login-collapse").toggle();
+        $("#register-button").show();
+         
+   }); 
+});*/

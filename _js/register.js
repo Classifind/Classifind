@@ -20,5 +20,8 @@ $("#avatar").fileinput({
 });
 
 $(document).ready(function() {
+
     $('#datepicker').datepicker();
+
 });
+
