@@ -1,5 +1,5 @@
 var classifindApp = angular.module('classifindApp', ['ngRoute', 'ngCookies', 'classifind.angular-timeago']);
-var apiIP = 'http://25.19.222.241:3000/api/';
+var apiIP = 'http://classifind.cloudapp.net/api/';
 
 
 classifindApp.config(function ($routeProvider, $locationProvider) {
@@ -95,7 +95,7 @@ classifindApp.controller('loginController', ['$scope', '$route', '$http', '$loca
 			response = $http.get(endpointURL);
 			response.success(function (data, status, headers, config) {
 				$cookieStore.put('userName', data.username);
-				$window.location.href = 'http://localhost:5000/';
+				$window.location.href = 'http://classifind.ca/';
 			});
 			response.error(function (data, status, headers, config) {
 				console.log(status);
@@ -130,7 +130,7 @@ classifindApp.controller('loginController', ['$scope', '$route', '$http', '$loca
 			$cookieStore.remove('userName');
 			$cookieStore.remove('userId');
 			$cookieStore.remove('sessionToken');
-			$window.location.href = 'http://localhost:5000/';
+			$window.location.href = 'http://classifind.ca/';
 		}
 		else {
 			$scope.loggedOut = "";
@@ -303,7 +303,7 @@ classifindApp.controller('registerController', ['$scope', '$http', '$location', 
 				response = $http.get(endpointURL);
 				response.success(function (data, status, headers, config) {
 					$cookieStore.put('userName', data.username);
-					$window.location.href = 'http://localhost:5000/';
+					$window.location.href = 'http://classifind.ca/';
 				});
 				response.error(function (data, status, headers, config) {
 					console.log(status);
