@@ -26,8 +26,8 @@
                <div class="row">
                      <div class="col-md-12">
                          <h3>Average Rating</h3>
-                        Jobs You've Completed: <br /><star-rating ng-model="receivedProviderAverage" readonly="isRatingReadonly"></star-rating><h3 style="margin-top: 5px">{{ receivedProviderAverage }}&nbsp;<small>({{ providerCount }})</small></h3><br />
-                        Jobs You've Posted: <br /><star-rating ng-model="receivedRequestorAverage" readonly="isRatingReadonly"></star-rating><h3 style="margin-top: 5px">{{ receivedRequestorAverage }}&nbsp;<small>({{ requestorCount }})</small></h3>
+                        <div ng-show="receivedProviderAverage>0&&receivedProviderAverage<6">Jobs You've Completed: <br /><star-rating ng-model="receivedProviderAverage" readonly="isRatingReadonly"></star-rating><h3 style="margin-top: 5px">{{ receivedProviderAverage }}&nbsp;<small>({{ providerCount }})</small></h3><br /></div>
+                         <div ng-show="receivedRequestorAverage>0&&receivedRequestorAverage<6">Jobs You've Posted: <br /><star-rating ng-model="receivedRequestorAverage" readonly="isRatingReadonly"></star-rating><h3 style="margin-top: 5px">{{ receivedRequestorAverage }}&nbsp;<small>({{ requestorCount }})</small></h3></div>
                      </div>
                </div>
          </div>

@@ -352,6 +352,23 @@ classifindApp.controller('profileController', ['$scope', '$route', '$http', '$lo
 			$scope.receivedProviderPage = 0;
 			$scope.pSize = 3;
 			$scope.receivedProviderReviews = data.reviewInfo;
+			var count = 0;
+			var receivedProviderAvg = 0;
+			angular.forEach(data.reviewInfo, function(review) {
+				receivedProviderAvg += review.reviewRating;
+				count += 1;
+			});
+			
+			if (receivedProviderAvg != 0)
+			{
+				var avg = receivedProviderAvg / count;
+				$scope.receivedProviderAverage = (Math.round(avg * 100) / 100).toFixed(1);
+				$scope.providerCount = count;
+			}
+			else{
+				$scope.receivedProviderAverage = "No reviews received";
+			}
+			
 		});
 		response.error(function (data, status, headers, config) {
 			console.log(status);
@@ -362,12 +379,32 @@ classifindApp.controller('profileController', ['$scope', '$route', '$http', '$lo
 			$scope.receivedRequestorPage = 0;
 			$scope.pSize = 3;
 			$scope.receivedRequestorReviews = data.reviewInfo;
+			var count = 0;
+			var receivedRequestorAvg = 0;
+			angular.forEach(data.reviewInfo, function(review) {
+				receivedRequestorAvg += review.reviewRating;
+				count += 1;
+			});
+			
+			if (receivedRequestorAvg != 0)
+			{
+				var avg = receivedRequestorAvg / count;
+				$scope.receivedRequestorAverage = (Math.round(avg * 100) / 100).toFixed(1);
+				$scope.requestorCount = count;
+			}
+			else{
+				$scope.receivedRquestorAverage = "No reviews received";
+			}
 		});
 		response.error(function (data, status, headers, config) {
 			console.log(status);
 		});
+		
 	});
-
+	$scope.viewProfile = function (id) {
+		$rootScope.userId = id;
+		$location.path('/profile');
+	}
 
 	$scope.viewListing = function (id) {
 		$rootScope.listingId = id;
