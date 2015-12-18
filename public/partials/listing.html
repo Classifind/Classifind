@@ -11,15 +11,18 @@
 								<span ng-show="listingInformation.jobStatus=='Submitted'" class="btn btn-success btn-xs">OPEN</span>
 								<span ng-show="listingInformation.jobStatus=='In Progress'||listingInformation.jobStatus=='Awaiting Review'" class="btn btn-warning btn-xs">IN PROGRESS</span>
 							</h3>
+								<p><i class="fa fa-thumb-tack"></i> <a href ng-click="searchCategory(listingInformation.jobCategory)">{{ listingInformation.jobCategory }}</a></p>
 								<p><span class="glyphicon glyphicon-map-marker"></span> {{ listingInformation.jobAddressStreet }}, {{ listingInformation.jobAddressCity }}, {{ listingInformation.jobAddressCountry }}, {{ listingInformation.jobAddressPostal }}</p>
 								<p>
 									{{ listingInformation.jobDescription }}
 								</p>
-								<ul class="nav nav-pills tags">
-									<li class="active">
-										<a href ng-click="searchCategory(listingInformation.jobCategory)" class="btn btn-primary btn-xs">{{ listingInformation.jobCategory }}</a>
-									</li>
-								</ul>
+								<p>
+									<ul class="nav">
+										<li class="active" ng-repeat="skill in listingInformation.jobSkills">
+											<a class="badge pull-left" href><i class="glyphicon glyphicon-tags"></i>&nbsp;&nbsp;{{ skill.skillName }}</a>
+										</li>
+									</ul>
+								</p>
 							<div class="row">
 								<div class="col-md-12 requestorInfo">
 									<img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/people" class="img-circle requestorAvatar" />

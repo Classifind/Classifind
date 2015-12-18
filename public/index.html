@@ -1,13 +1,15 @@
 <html>
-
 <head>
 	<meta charset="UTF-8">
+	<title>Classifind</title>
+	<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css'>
 	<link rel="stylesheet" href="_css/bootstrap.min.css" />
 	<link rel="stylesheet" href="_css/nav.css" />
 	<link rel="stylesheet" href="_css/home.css" />
 	<link rel="stylesheet" href="_css/main.css" />
 	<link rel="stylesheet" href="_css/search.css" />
 	<link rel="stylesheet" href="_css/star-rating.css" />
+	<link rel="stylesheet" href="_css/angular-tags.min.css" />
 	<link rel="stylesheet" href="_css/dashboard.css" />
 	<base href="/">
 </head>
@@ -48,8 +50,8 @@
 								<label class="sr-only" for="Password">Password</label>
 								<input type="password" class="form-control" id="Password" placeholder="Password" ng-model="userPassword" required />
 							</div>
-							<button type="submit" class="btn btn-success" ng-click="login()">GO</button>
-							<button type="button" class="btn btn-success" ng-click="register()">Register</button>
+							<button type="submit" class="btn btn-primary" ng-click="login()">GO</button>
+							<button type="button" class="btn btn-primary" ng-click="register()">Register</button>
 						</form>
 						<form class="navbar-form navbar-right form-inline" role="form" ng-show="loggedIn">
 							<div class="form-group">
@@ -81,16 +83,16 @@
 	<footer>
 		<div class="copyright">©2015 Classifind. Classifind is a trademark of Team GLASS.</div>
 	</footer>
-
+	<script src="_js/jquery.min.js"></script>
 	<script src="_js/angular.min.js"></script>
 	<script src="_js/angular-route.js"></script>
 	<script src="_js/angular-cookies.min.js"></script>
 	<script src="_js/angular-timeago.js"></script>
-	<script src="_js/app.js"></script>
-	<script src="_js/jquery.min.js"></script>
+	<script src="_js/angular-tags.min.js"></script>
+	<script src="_js/angular-messages.min.js"></script>
 	<script src="_js/bootstrap.min.js"></script>
 	<script src="_js/nav.js"></script>
 	<script src="_js/star-rating.js"></script>
+	<script src="_js/app.js"></script>
 </body>
-
 </html>

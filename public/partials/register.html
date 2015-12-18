@@ -1,28 +1,41 @@
 <div class="wrap">
 	<div class="container">
-		<form name="registration" enctype="multipart/form-data">
+		<form name="registration" ng-submit="submitForm(registration.$valid)" enctype="multipart/form-data" novalidate>
 			<div class="row">
 				<div class="col-xs-12 col-sm-6 col-md-8">
 					<div class="panel panel-default">
 						<div class="panel-heading"><strong>Account Information</strong></div>
 						<div class="panel-body">
-							<div class="form-group">
+							<div class="form-group" ng-class="{ 'has-error' : registration.userFullName.$invalid && !registration.userFullName.$pristine }">
 								<label for="fullName">Full Name:</label>
-								<input type="text" class="form-control" ng-model="userFullName" id="fullName" required>
-								<div id="emailError"></div>
+								<input type="text" class="form-control" ng-model="userFullName" id="fullName" name="userFullName" required>
+
+                                <div class="help-block" ng-messages="registration.userFullName.$error" ng-if="registration.userFullName.$invalid && !registration.userFullName.$pristine">
+                                    <p ng-message="required">Your name is required.</p>
+                                </div>
+
 							</div>
-							<div class="form-group">
+							<div class="form-group" ng-class="{ 'has-error' : registration.userEmail.$invalid && !registration.userEmail.$pristine }">
 								<label for="title">Email:</label>
-								<input type="email" class="form-control" ng-blur="checkEmail" ng-model="userEmail" id="email" required>
-								<div id="emailError"></div>
-							</div>
-							<div class="form-group">
+								<input type="email" class="form-control" ng-model="userEmail" id="email" name="userEmail" placeholder="someone@email.com" required>
+
+                                <p ng-show="registration.userEmail.$invalid && !registration.userEmail.$pristine" class="help-block">Enter a valid email.</p>
+							</div>                            
+							<div class="form-group" ng-class="{ 'has-error' : registration.userName.$invalid && !registration.userName.$pristine }">
 								<label for="username">Username:</label>
-								<input type="text" class="form-control" ng-model="userName" id="username" required>
+								<input type="text" class="form-control" ng-model="userName" id="username" name="userName" ng-minlength="5" ng-maxlength="15" required>
+
+                                <p ng-show="registration.userName.$error.minlength" class="help-block">Username must be greater than 5 characters.</p>
+                                <p ng-show="registration.userName.$error.maxlength" class="help-block">Username must be less than 15 characters.</p>
+
 							</div>
-							<div class="form-group">
+							<div class="form-group" ng-class="{ 'has-error' : registration.userPassword.$invalid && !registration.userPassword.$pristine }">
 								<label for="password">Password:</label>
-								<input type="password" class="form-control" ng-model="userPassword" id="password" required>
+								<input type="password" class="form-control" ng-model="userPassword" id="password" name="userPassword" ng-minlength="8" ng-maxlength="25" required>
+                                
+                                <p ng-show="registration.userPassword.$error.minlength" class="help-block">Password must be greater than 8 characters.</p>
+                                <p ng-show="registration.userPassword.$error.maxlength" class="help-block">Password must be less than 25 characters.</p>
+                                
 							</div>
 							<!--<div class="form-group">
 								<label for="password-confirm">Confirm Password:</label>
@@ -50,26 +63,38 @@
 					<div class="panel panel-default">
 						<div class="panel-heading"><strong>Location</strong></div>
 						<div class="panel-body">
-							<div class="form-group">
+							<div class="form-group" ng-class="{ 'has-error' : registration.userStreet.$invalid && !registration.userStreet.$pristine }" >
 								<label for="street">Street:</label>
-								<input type="text" class="form-control" id="street" ng-model="userStreet">
+								<input type="text" class="form-control" id="street" name="userStreet" ng-model="userStreet" ng-minlength="2" placeholder="Wellington St" required>
+                                
+                                <p ng-show="registration.userStreet.$invalid && !registration.userStreet.$pristine" class="help-block">Enter valid street.</p>
+                                
 							</div>
-							<div class="form-group">
+							<div class="form-group" ng-class="{ 'has-error' : registration.userCity.$invalid && !registration.userCity.$pristine }">
 								<label for="city">City:</label>
-								<input type="text" class="form-control" id="city" ng-model="userCity">
+								<input type="text" class="form-control" id="city" name="userCity" ng-model="userCity" ng-minlength="2" placeholder="Ottawa" required>
+                                
+                                <p ng-show="registration.userCity.$invalid && !registration.userCity.$pristine" class="help-block">Enter valid city.</p>
+                                
 							</div>
-							<div class="form-group">
+							<div class="form-group" ng-class="{ 'has-error' : registration.userCountry.$error.required && registration.userCountry.$touched }">
 								<label for="country">Country:</label>
-								<select class="form-control" id="country" ng-model="userCountry">
+								<select class="form-control" id="country" name="userCountry" ng-model="userCountry" placeholder="Select country" required>
 									<option>Canada</option>
 									<option>United States</option>
 									<option>United Kingdom</option>
 									<option>Mexico</option>
 								</select>
+                                
+                                <p ng-show="registration.userCountry.$error.required && registration.userCountry.$touched" class="help-block">Select country.</p>
+                                
 							</div>
-							<div class="form-group">
+							<div class="form-group" ng-class="{ 'has-error' : registration.userPostal.$invalid && !registration.userPostal.$pristine }">
 								<label for="city">Postal:</label>
-								<input type="text" class="form-control" id="postal" ng-model="userPostal">
+								<input type="text" class="form-control" id="postal" name="userPostal" ng-model="userPostal" ng-minlength="5" ng-maxlength="7" placeholder="K1A0A9" required>
+                                
+                                <p ng-show="registration.userPostal.$invalid && !registration.userPostal.$pristine" class="help-block">Invalid postal code.</p>
+                                
 							</div>
 						</div>
 					</div>
@@ -91,8 +116,14 @@
 								<textarea class="form-control" rows="5" ng-model="userBio" id="bio"></textarea>
 							</div>
 							<div class="form-group">
+								<label for="tags">Skills:</label>
+								<tags-input ng-model="tags" id="tags" display-property="skillName" placeholder="Add tags" key-property="id">
+								<auto-complete source="loadTags($query)" min-length="0" load-on-focus="true" max-results-to-show="32"></auto-complete>
+								</tags-input>
+							</div>
+							<div class="form-group">
 								<label for="phone">Phone:</label>
-								<input type="text" class="form-control" id="phone" ng-model="userPhone">
+								<input type="text" class="form-control" id="phone" ng-model="userPhone" placeholder="+1 613 992 4793">
 							</div>
 						</div>
 					</div>
@@ -100,7 +131,7 @@
 			</div>
 
 			
-			<button type="submit" class="btn btn-lg btn-primary btn-block" id="js-listing-submit" ng-click="registerUser()">Create Account</button>
+			<button type="submit" class="btn btn-lg btn-primary btn-block" id="js-listing-submit" ng-disabled="registration.$invalid" ng-click="registerUser()">Create Account</button>
 		</form>
 	</div>
 </div>

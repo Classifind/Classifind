@@ -3,23 +3,40 @@
       <div class="row">
          <div class="col-md-12">
             <div class="jumbotron profileBox">
-               <div class="profileLeft"><img class="profileAvatar" alt="User Avatar" src="images/default_avatar.png" /></div>
-               <div class="profileInfo">
-                  <h2 class="text-left">{{ profile.userFullName }}</h2>
-                  <p><span class="glyphicon glyphicon-map-marker"></span> {{ profile.userAddressStreet }}, {{ profile.userAddressCity }},
-                     {{ profile.userAddressCountry }}, {{ profile.userAddressPostal }}
-                  </p>
-                  <p><span class="glyphicon glyphicon-earphone"></span> {{ profile.userPhone }}</p>
-                  <p>{{ profile.userDescription }}</p>
+               <div class="row">
+                  <div class="col-md-3">
+                  <img class="profileAvatar" alt="User Avatar" src="images/default_avatar.png" />
+                  </div>
+                  <div class="col-md-9">
+                        <h2 class="text-left">{{ profile.userFullName }}</h2>
+                        <p><span class="glyphicon glyphicon-map-marker"></span> {{ profile.userAddressStreet }}, {{ profile.userAddressCity }},
+                        {{ profile.userAddressCountry }}, {{ profile.userAddressPostal }}
+                        </p>
+                        <p><span class="glyphicon glyphicon-earphone"></span> {{ profile.userPhone }}</p>
+                        <p>{{ profile.userDescription }}</p>
+                        <p>
+                              <ul class="nav">
+                                    <li class="active" ng-repeat="skill in userSkills">
+                                          <a class="badge pull-left" href><i class="glyphicon glyphicon-tags"></i>&nbsp;&nbsp;{{ skill.skillName }}</a>
+                                    </li>
+                              </ul>
+                        </p>
+                  </div>
                </div>
-            </div>
+               <div class="row">
+                     <div class="col-md-12">
+                         <h3>Average Rating</h3>
+                        Jobs You've Completed: <br /><star-rating ng-model="receivedProviderAverage" readonly="isRatingReadonly"></star-rating><h3 style="margin-top: 5px">{{ receivedProviderAverage }}&nbsp;<small>({{ providerCount }})</small></h3><br />
+                        Jobs You've Posted: <br /><star-rating ng-model="receivedRequestorAverage" readonly="isRatingReadonly"></star-rating><h3 style="margin-top: 5px">{{ receivedRequestorAverage }}&nbsp;<small>({{ requestorCount }})</small></h3>
+                     </div>
+               </div>
          </div>
       </div>
       <div class="row" ng-hide="providedJobs.length==0">
          <div class="col-md-12">
             <h2>Jobs You're Working On</h2>
             <div class="row">
-               <div class="col-md-4" ng-repeat="job in providedJobs | startFrom:providerPage*pSize | limitTo:pSize">
+               <div class="col-md-4 card" ng-repeat="job in providedJobs | startFrom:providerPage*pSize | limitTo:pSize">
                   <div class="thumbnail dashboardThumb">
                      <img alt="Listing Picture " src="http://lorempixel.com/400/200/nightlife/ " />
                      <div class="caption ">
@@ -41,19 +58,19 @@
                   </div>
                </div>
             </div>
-            <button class="left carousel-control paginationButton" ng-disabled="providerPage==0" ng-class="{'disabledButton': providerPage==0}" ng-click="providerPage=providerPage-1 ">
+            <button class="left carousel-control paginationButton" ng-disabled="providerPage==0" ng-class="{'disabledButton': providerPage==0}" ng-hide="providedJobs.length<=pSize" ng-click="providerPage=providerPage-1 ">
             	<span class="glyphicon glyphicon-chevron-left arrowButtons"></span>
             </button>
-            <button class="right carousel-control paginationButton" ng-disabled="providerPage>= providedJobs.length/pSize - 1" ng-class="{'disabledButton': providerPage>= providedJobs.length/pSize - 1}" ng-click="providerPage=providerPage+1">
+            <button class="right carousel-control paginationButton" ng-disabled="providerPage>= providedJobs.length/pSize - 1" ng-hide="providedJobs.length<=pSize" ng-class="{'disabledButton': providerPage>= providedJobs.length/pSize - 1}" ng-click="providerPage=providerPage+1">
            		<span class="glyphicon glyphicon-chevron-right arrowButtons"></span>
             </button>
          </div>
       </div>
-      <div class="row" ng-hide="requestedJobs.length==0">
-         <div class="col-md-12">
-            <h2>Your Listings</h2>
+      <div class="row">
+         <div class="col-md-12" ng-hide="requestedJobs.length==0">
+            <h2>Jobs You've Posted</h2>
             <div class="row">
-               <div class="col-md-4" ng-repeat="job in requestedJobs | startFrom:requestorPage*pSize | limitTo:pSize">
+               <div class="col-md-4 card" ng-repeat="job in requestedJobs | startFrom:requestorPage*pSize | limitTo:pSize">
                   <div class="thumbnail dashboardThumb">
                      <img alt="Listing Picture " src="http://lorempixel.com/400/200/sports/ " />
                      <div class="caption ">
@@ -78,10 +95,10 @@
                   </div>
                </div>
             </div>
-            <button class="left carousel-control paginationButton" ng-disabled="requestorPage==0" ng-class="{'disabledButton': requestorPage==0}" ng-click="requestorPage=requestorPage-1 ">
+            <button class="left carousel-control paginationButton" ng-disabled="requestorPage==0" ng-hide="requestedJobs.length<=pSize" ng-class="{'disabledButton': requestorPage==0}" ng-click="requestorPage=requestorPage-1 ">
             	<span class="glyphicon glyphicon-chevron-left arrowButtons"></span>
             </button>
-            <button class="right carousel-control paginationButton" ng-disabled="requestorPage>= requestedJobs.length/pSize - 1" ng-class="{'disabledButton': requestorPage>= requestedJobs.length/pSize - 1}" ng-click="requestorPage=requestorPage+1">
+            <button class="right carousel-control paginationButton" ng-disabled="requestorPage>= requestedJobs.length/pSize - 1" ng-hide="requestedJobs.length<=pSize" ng-class="{'disabledButton': requestorPage>= requestedJobs.length/pSize - 1}" ng-click="requestorPage=requestorPage+1">
            		<span class="glyphicon glyphicon-chevron-right arrowButtons"></span>
             </button>
          </div>
@@ -91,57 +108,57 @@
       </div>
       <div class="row" ng-hide="receivedProviderReviews.length==0">
          <div class="col-md-12">
-           <h2>Reviews for Jobs I've Completed</h2>
+           <h2>Reviews for Jobs You've Completed</h2>
             <div class="carousel-inner">
                <div class="item active">
                   <div class="col-md-4 col-sm-6" ng-repeat="review in receivedProviderReviews | startFrom:receivedProviderPage*pSize | limitTo:pSize">
                      <div class="block-text rel zmin">
-                        <a title="" href="#">review</a>
-                        <div class="mark">Rating: <input class="rating" value="{{review.reviewRating}}" />
+                        <a ng-click="viewListing(review.reviewedJobId)">{{ review.jobReview.jobTitle }}</a>
+                        <div class="mark"><star-rating ng-model="review.reviewRating" readonly="isRatingReadonly"></star-rating>
                         </div>
                         <p> {{ review.reviewComments }} </p>
                      </div>
                      <div class="person-text">
                         <img src="http://lorempixel.com/80/80/people" class="img-circle requestorAvatar" />
-                        <a title="" href="#" ng-click="GOHERE(review.submittedReviews.id)">{{ review.submittedReviews.userFullName }}</a>
+                        <a title="" href="#" ng-click="viewUser(review.submittedReviews.id)">{{ review.submittedReviews.userFullName }}</a>
                         <i>{{ review.reviewDate | timeAgo:'MM/dd/yyyy' }}</i>
                      </div>
                   </div>
                </div>
             </div>
-            <a class="left carousel-control" href="#carousel-reviews" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left"></span>
+            <a class="left carousel-control" href="#carousel-reviews" ng-hide="receivedProviderReviews.length<=pSize" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left arrowButtons"></span>
             </a>
-            <a class="right carousel-control" href="#carousel-reviews" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right"></span>
+            <a class="right carousel-control" href="#carousel-reviews" ng-hide="receivedProviderReviews.length<=pSize" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right arrowButtons"></span>
             </a>
          </div>
       </div>
       <div class="row" ng-hide="receivedRequestorReviews.length==0">
          <div class="col-md-12">
-           <h2>Reviews for Jobs I've Listed</h2>
+           <h2>Reviews for Jobs You've Posted</h2>
             <div class="carousel-inner">
                <div class="item active">
                   <div class="col-md-4 col-sm-6" ng-repeat="review in receivedRequestorReviews | startFrom:receivedRequestorPage*pSize | limitTo:pSize">
                      <div class="block-text rel zmin">
-                        <a title="" href="#">review</a>
-                        <div class="mark">Rating: <input class="rating" value="{{review.reviewRating}}" />
+                        <a ng-click="viewListing(review.reviewedJobId)">{{ review.jobReview.jobTitle }}</a>
+                        <div class="mark"><star-rating ng-model="review.reviewRating" readonly="isRatingReadonly"></star-rating>
                         </div>
                         <p> {{ review.reviewComments }} </p>
                      </div>
                      <div class="person-text">
                         <img src="http://lorempixel.com/80/80/people" class="img-circle requestorAvatar" />
-                        <a title="" href="#" ng-click="GOHERE(review.submittedReviews.id)">{{ review.submittedReviews.userFullName }}</a>
+                        <a title="" href="#" ng-click="viewUser(review.submittedReviews.id)">{{ review.submittedReviews.userFullName }}</a>
                         <i>{{ review.reviewDate | timeAgo:'MM/dd/yyyy' }}</i>
                      </div>
                   </div>
                </div>
             </div>
-            <a class="left carousel-control" href="#carousel-reviews" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left"></span>
+            <a class="left carousel-control" href="#carousel-reviews" ng-hide="receivedRequestorReviews.length<=pSize" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left arrowButtons"></span>
             </a>
-            <a class="right carousel-control" href="#carousel-reviews" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right"></span>
+            <a class="right carousel-control" href="#carousel-reviews" ng-hide="receivedRequestorReviews.length<=pSize" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right arrowButtons"></span>
             </a>
          </div>
       </div>

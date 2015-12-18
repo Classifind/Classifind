@@ -1,29 +1,46 @@
 <div class="wrap">
   <div class="container">
-    <form>
+    <form name="createListing" ng-submit="submitForm(createListing.$valid)" novalidate>
       <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-8">
           <div class="panel panel-default">
             <div class="panel-heading"><strong>Listing Information</strong></div>
             <div class="panel-body">
-              <div class="form-group">
+              <div class="form-group" ng-class="{ 'has-error' : createListing.listingTitle.$invalid && !createListing.listingTitle.$pristine }">
                 <label for="title">Title:</label>
-                <input type="text" class="form-control" id="title" ng-model="listingTitle" required>
+                <input type="text" class="form-control" id="title" ng-model="listingTitle" name="listingTitle" ng-minlength="5" ng-maxlength="100"
+                required>
+
+
+                <p ng-show="createListing.listingTitle.$error.minlength" class="help-block">Your title is too short!</p>
+                <p ng-show="createListing.listingTitle.$error.maxlength" class="help-block">Your title is too long!</p>
+
+              </div>
+              <div class="form-group" ng-class="{ 'has-error' : createListing.listingCategory.$error.required && createListing.listingCategory.$touched }">
+                <label for="category">Category:</label>
+                <select class="form-control" id="category" ng-model="listingCategory" name="listingCategory" required>
+                  <option>Home Renovation</option>
+                  <option>Technology</option>
+                  <option>Automotive</option>
+                  <option>Creative</option>
+                  <option>Personal Services</option>
+                  <option>Miscellaneous</option>
+                </select>
+
+                <p ng-show="createListing.listingCategory.$error.required && createListing.listingCategory.$touched" class="help-block">Select listing category.</p>
+
+              </div>
+              <div class="form-group" ng-class="{ 'has-error' : createListing.listingDesc.$invalid && !createListing.listingDesc.$pristine }">
+                <label for="comment">Description:</label>
+                <textarea class="form-control" rows="5" id="desc" ng-model="listingDesc" name="listingDesc" ng-minlength="5" required></textarea>
+
+                <p ng-show="createListing.listingDesc.$invalid && !createListing.listingDesc.$pristine" class="help-block">Enter valid description.</p>
               </div>
               <div class="form-group">
-                  <label for="category">Category:</label>
-                  <select class="form-control" id="category" ng-model="listingCategory" required>
-                    <option>Home Renovation</option>
-                    <option>Technology</option>
-                    <option>Automotive</option>
-                    <option>Creative</option>
-                    <option>Personal Services</option>
-                    <option>Miscellaneous</option>
-                  </select>
-                </div>
-              <div class="form-group">
-                <label for="comment">Description:</label>
-                <textarea class="form-control" rows="5" id="desc" ng-model="listingDesc" required></textarea>
+                <label for="tags">Associated Skills:</label>
+                <tags-input ng-model="tags" id="tags" display-property="skillName" placeholder="Add tags" key-property="id">
+                  <auto-complete source="loadTags($query)" min-length="0" load-on-focus="true" max-results-to-show="32"></auto-complete>
+                </tags-input>
               </div>
             </div>
           </div>
@@ -32,28 +49,43 @@
           <div class="panel panel-default">
             <div class="panel-heading"><strong>Location</strong></div>
             <div class="panel-body">
-                <div class="form-group">
-                  <!-- <input id="advanced-placepicker" class="form-control" data-map-container-id="collapseOne" /> -->
-                  <label for="street">Street:</label>
-                  <input type="text" id="street" class="form-control" ng-value="listingStreet" ng-model="listingStreet" required>
-                </div>
-                <div class="form-group">
-                  <label for="city">City:</label>
-                  <input type="text" id="city" class="form-control" ng-value="listingCity" ng-model="listingCity" required>
-                </div>
-                <div class="form-group">
-                  <label for="postal">Postal:</label>
-                  <input type="text" id="postal" class="form-control" ng-value="listingPostal" ng-model="listingPostal" required>
-                </div>
-                <div class="form-group">
-                  <label for="country">Country:</label>
-                  <select class="form-control newListingCountry" id="country" ng-model="listingCountry" required>
-                    <option>Canada</option>
-                    <option>United States</option>
-                    <option>United Kingdom</option>
-                    <option>Mexico</option>
-                  </select>
-                </div>
+              <div class="form-group" ng-class="{ 'has-error' : createListing.listingStreet.$invalid && !createListing.listingStreet.$pristine }">
+                <!-- <input id="advanced-placepicker" class="form-control" data-map-container-id="collapseOne" /> -->
+                <label for="street">Street:</label>
+                <input type="text" id="street" class="form-control" ng-value="listingStreet" ng-model="listingStreet" name="listingStreet"
+                ng-minlength="2" required>
+
+                <p ng-show="createListing.listingStreet.$invalid && !createListing.listingStreet.$pristine" class="help-block">Enter valid street.</p>
+
+              </div>
+              <div class="form-group" ng-class="{ 'has-error' : createListing.listingCity.$invalid && !createListing.listingCity.$pristine }">
+                <label for="city">City:</label>
+                <input type="text" id="city" class="form-control" ng-value="listingCity" ng-model="listingCity" name="listingCity" ng-minlength="2"
+                required>
+
+                <p ng-show="createListing.listingCity.$invalid && !createListing.listingCity.$pristine" class="help-block">Enter valid City.</p>
+
+              </div>
+              <div class="form-group" ng-class="{ 'has-error' : createListing.listingPostal.$invalid && !createListing.listingPostal.$pristine }">
+                <label for="postal">Postal:</label>
+                <input type="text" id="postal" class="form-control" ng-value="listingPostal" ng-model="listingPostal" name="listingPostal"
+                ng-minlength="5" ng-maxlength="7" required>
+
+                <p ng-show="createListing.listingPostal.$invalid && !createListing.listingPostal.$pristine" class="help-block">Invalid postal code.</p>
+              </div>
+              <div class="form-group" ng-class="{ 'has-error' : createListing.listingCountry.$error.required && createListing.listingCountry.$touched }">
+                <label for="country">Country:</label>
+                <select class="form-control newListingCountry" id="country" ng-model="listingCountry" name="listingCountry" ng-minlength="2"
+                required>
+                  <option>Canada</option>
+                  <option>United States</option>
+                  <option>United Kingdom</option>
+                  <option>Mexico</option>
+                </select>
+
+                <p ng-show="createListing.listingCountry.$error.required && createListing.listingCountry.$touched" class="help-block">Select Country.</p>
+
+              </div>
               <!--<div id="collapseOne" class="collapse">
                 <div class="placepicker-map thumbnail"></div>
               </div> -->
@@ -102,7 +134,8 @@
         </div>
       </div>
 
-      <button type="submit" class="btn btn-lg btn-primary btn-block" id="js-listing-submit" ng-click="createListing()">Create Listing</button>
+      <button type="submit" class="btn btn-lg btn-primary btn-block" id="js-listing-submit" ng-disabled="createListing.$invalid"
+      ng-click="submitNewListing()">Create Listing</button>
 
     </form>
   </div>
