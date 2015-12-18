@@ -9,7 +9,7 @@
 								<h3>
 								{{ listingInformation.jobTitle }} <span ng-show="listingInformation.jobStatus=='Completed'" class="btn btn-danger btn-xs">COMPLETED</span>
 								<span ng-show="listingInformation.jobStatus=='Submitted'" class="btn btn-success btn-xs">OPEN</span>
-								<span ng-show="listingInformation.jobStatus=='In Progress'" class="btn btn-warning btn-xs">IN PROGRESS</span>
+								<span ng-show="listingInformation.jobStatus=='In Progress'||listingInformation.jobStatus=='Awaiting Review'" class="btn btn-warning btn-xs">IN PROGRESS</span>
 							</h3>
 								<p><span class="glyphicon glyphicon-map-marker"></span> {{ listingInformation.jobAddressStreet }}, {{ listingInformation.jobAddressCity }}, {{ listingInformation.jobAddressCountry }}, {{ listingInformation.jobAddressPostal }}</p>
 								<p>

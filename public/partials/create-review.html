@@ -32,13 +32,13 @@
 					<div class="row">
 						<div class="col-md-8">
 							<h3>
-						Provider Information
+						Requestor Information
 					</h3><img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/" />
 							<p>
-								<h2 class="text-left">{{ providerInfo.userFullName }}</h2>
-								<p><span class="glyphicon glyphicon-map-marker"></span> {{ providerInfo.userAddressStreet }}, {{ providerInfo.userAddressCity }},
-									{{ providerInfo.userAddressCountry }}, {{ providerInfo.userAddressPostal }}</p>
-								<p><span class="glyphicon glyphicon-earphone"></span> {{ providerInfo.userPhone }}</p>
+								<h2 class="text-left">{{ requestorInfo.userFullName }}</h2>
+								<p><span class="glyphicon glyphicon-map-marker"></span> {{ requestorInfo.userAddressStreet }}, {{ requestorInfo.userAddressCity }},
+									{{ requestorInfo.userAddressCountry }}, {{ requestorInfo.userAddressPostal }}</p>
+								<p><span class="glyphicon glyphicon-earphone"></span> {{ requestorInfo.userPhone }}</p>
 								<h3 class="text-success text-right" ng-repeat="bid in acceptedBidList">
 									{{ bid.bidPrice | currency }} <small>{{ bid.bidDate | date:'MM/dd/yyyy' }}</small>
 								</h3>
@@ -47,7 +47,7 @@
 						</div>
 						<div class="col-md-4">
 							<h3>
-								Job Finished? Submit a review to close your listing! 
+								Job Finished? Submit a review to share your experience! 
 							</h3>
 							<form role="form">
 								<div class="form-group">

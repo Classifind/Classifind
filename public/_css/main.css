@@ -148,5 +148,34 @@ footer {
 }
 
 .listingButtons {
-  text-align: right;
+  padding-right: 15px;
+}
+
+.dashboardThumb {
+  min-height: 430px;
+}
+
+.cardButtons {
+  position: absolute;
+  display: block;
+  bottom: 35px;
+  left: 30px;
+  right: 30px;
+}
+
+.jobDesc {
+  padding-bottom: 65px;
+}
+
+.arrowButtons {
+  color: #286090;
+}
+
+.paginationButton {
+  cursor: pointer;
+  border: none;
+}
+
+.disabledButton {
+  cursor: not-allowed !important;
 }

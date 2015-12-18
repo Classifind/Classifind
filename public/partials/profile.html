@@ -19,13 +19,13 @@
 				<div class="row">
 					<div class="col-md-4" ng-repeat="job in jobs | startFrom:cPage*pSize | limitTo:pSize" ">
 						<div class="thumbnail ">
-							<img alt="Listing Picture " src="http://lorempixel.com/output/people-q-c-600-200-1.jpg " />
+							<img alt="Listing Picture " src="http://lorempixel.com/400/200/sports/ " />
 							<div class="caption ">
 								<h3>
 								{{ job.jobTitle }}
 							</h3>
 								<p>
-									{{ job.jobDescription }}
+									{{ job.jobDescription | limitTo:125 }}...	
 								</p>
 								<p>
 									<a class="btn btn-primary " ng-click="viewListing(job.id) " href>View</a> 

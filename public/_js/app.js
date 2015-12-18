@@ -1,5 +1,5 @@
 var classifindApp = angular.module('classifindApp', ['ngRoute', 'ngCookies', 'classifind.angular-timeago']);
-var apiIP = 'http://25.19.222.241:3000/api/';
+var apiIP = 'http://classifind-api.herokuapp.com/api/';
 
 
 classifindApp.config(function ($routeProvider, $locationProvider) {
@@ -45,6 +45,11 @@ classifindApp.config(function ($routeProvider, $locationProvider) {
             controller: 'manageJobController'
         })
 
+		.when('/create-review', {
+            templateUrl: 'partials/create-review.html',
+            controller: 'createReviewController'
+        })
+		
 		.when('/bid', {
             templateUrl: 'partials/bid.html',
             controller: 'bidController'
@@ -55,7 +60,9 @@ classifindApp.config(function ($routeProvider, $locationProvider) {
 		});
 });
 
-
+/***************************************************************************************************************************
+ * 												   Login Controller                                                        *
+ ***************************************************************************************************************************/
 classifindApp.controller('loginController', ['$scope', '$route', '$http', '$location', '$rootScope', '$window', '$cookieStore', function ($scope, $route, $http, $location, $rootScope, $window, $cookieStore) {
 	console.log('loginController loaded');
 	$scope.loggedIn = $cookieStore.get('loggedIn');
@@ -92,7 +99,7 @@ classifindApp.controller('loginController', ['$scope', '$route', '$http', '$loca
 			response = $http.get(endpointURL);
 			response.success(function (data, status, headers, config) {
 				$cookieStore.put('userName', data.username);
-				$window.location.href = 'http://localhost:5000/';
+				$window.location.href = 'http://classifind.ca/';
 			});
 			response.error(function (data, status, headers, config) {
 				console.log(status);
@@ -127,7 +134,7 @@ classifindApp.controller('loginController', ['$scope', '$route', '$http', '$loca
 			$cookieStore.remove('userName');
 			$cookieStore.remove('userId');
 			$cookieStore.remove('sessionToken');
-			$window.location.href = 'http://localhost:5000/';
+			$window.location.href = 'http://classifind.ca/';
 		}
 		else {
 			$scope.loggedOut = "";
@@ -135,8 +142,12 @@ classifindApp.controller('loginController', ['$scope', '$route', '$http', '$loca
 	}
 }]);
 
-//Dashboard Controller
-classifindApp.controller('dashController', ['$scope', '$route', '$http', '$location', '$rootScope', '$cookieStore', function ($scope, $route, $http, $location, $rootScope, $cookieStore) {
+/***************************************************************************************************************************
+ * 												 Dashboard Controller                                                      *
+ ***************************************************************************************************************************/
+classifindApp.controller('dashController', ['$scope', '$route', '$http', '$location', '$rootScope', '$cookieStore', 'timeAgo', function ($scope, $route, $http, $location, $rootScope, $cookieStore, timeAgo) {
+	var oneDay = 60 * 60 * 24;
+	timeAgo.settings.fullDateAfterSeconds = oneDay;
 	$scope.loggedIn = $cookieStore.get('loggedIn');
 	$scope.userName = $cookieStore.get('userName');
 	if ($scope.loggedIn == 'true') {
@@ -154,16 +165,42 @@ classifindApp.controller('dashController', ['$scope', '$route', '$http', '$locat
 		response.error(function (data, status, headers, config) {
 			console.log(status);
 		});
-		endURL = apiIP + "classifindUsers/" + uID + "/requestedJobs";
+		endURL = apiIP + "classifindUsers/incompleteRequestedJobs?userId=" + uID ;
 		response = $http.get(endURL);
 		response.success(function (data, status, headers, config) {
-			$scope.cPage = 0;
+			$scope.requestorPage = 0;
 			$scope.pSize = 3;
-			$scope.jobs = data;
-			$scope.numPages = function () {
-				return Math.ceil($scope.jobs.length / $scope.pSize);
-			}
-			console.log($scope.jobs);
+			$scope.requestedJobs = data.requestedJobInfo.requestedJobs;
+		});
+		response.error(function (data, status, headers, config) {
+			console.log(status);
+		});
+		endURL = apiIP + "classifindUsers/incompleteProvidedJobs?userId=" + uID ;
+		response = $http.get(endURL);
+		response.success(function (data, status, headers, config) {
+			$scope.providerPage = 0;
+			$scope.pSize = 3;
+			$scope.providedJobs = data.userJobsToReview.providedJobs;
+		});
+		response.error(function (data, status, headers, config) {
+			console.log(status);
+		});
+		endURL = apiIP + "reviews/receivedProviderReviews?userId=" + uID ;
+		response = $http.get(endURL);
+		response.success(function (data, status, headers, config) {
+			$scope.receivedProviderPage = 0;
+			$scope.pSize = 3;
+			$scope.receivedProviderReviews = data.reviewInfo;
+		});
+		response.error(function (data, status, headers, config) {
+			console.log(status);
+		});
+		endURL = apiIP + "reviews/receivedRequestorReviews?userId=" + uID ;
+		response = $http.get(endURL);
+		response.success(function (data, status, headers, config) {
+			$scope.receivedRequestorPage = 0;
+			$scope.pSize = 3;
+			$scope.receivedRequestorReviews = data.reviewInfo;
 		});
 		response.error(function (data, status, headers, config) {
 			console.log(status);
@@ -186,6 +223,13 @@ classifindApp.controller('dashController', ['$scope', '$route', '$http', '$locat
 		$rootScope.acceptedBidId = acceptedBidId;
 		$location.url('/manage-job');
 	}
+	
+	$scope.reviewPage = function (id, acceptedBidId) {
+		$rootScope.listingId = id;
+		console.log("Accepted Bid ID: " + acceptedBidId);
+		$rootScope.acceptedBidId = acceptedBidId;
+		$location.url('/create-review');
+	}
 
 	$scope.deleteListing = function (id) {
 		console.log('ID Passed: ' + id);
@@ -200,6 +244,10 @@ classifindApp.controller('dashController', ['$scope', '$route', '$http', '$locat
 	}
 }]);
 
+
+/***************************************************************************************************************************
+ * 											       Profile Controller                                                      *
+ ***************************************************************************************************************************/
 classifindApp.controller('profileController', ['$scope', '$route', '$http', '$location', '$rootScope', '$cookieStore', function ($scope, $route, $http, $location, $rootScope, $cookieStore) {
 	$scope.$watch('$viewContentLoaded', function () {
 		var uID = $rootScope.userId;
@@ -267,6 +315,10 @@ classifindApp.controller('searchController', ['$route', '$scope', '$http', '$loc
 	}
 }]);
 
+
+/***************************************************************************************************************************
+ * 												  Register Controller                                                      *
+ ***************************************************************************************************************************/
 classifindApp.controller('registerController', ['$scope', '$http', '$location', '$rootScope', '$cookieStore', '$window', function ($scope, $http, $location, $rootScope, $cookieStore, $window) {
 	console.log('registerController loaded');
 	$scope.registerUser = function () {
@@ -307,7 +359,7 @@ classifindApp.controller('registerController', ['$scope', '$http', '$location', 
 				response = $http.get(endpointURL);
 				response.success(function (data, status, headers, config) {
 					$cookieStore.put('userName', data.username);
-					$window.location.href = 'http://localhost:5000/';
+					$window.location.href = 'http://classifind.ca/';
 				});
 				response.error(function (data, status, headers, config) {
 					console.log(status);
@@ -340,6 +392,10 @@ classifindApp.controller('registerController', ['$scope', '$http', '$location', 
 	}*/
 }]);
 
+
+/***************************************************************************************************************************
+ * 												Search Results Controller                                                      *
+ ***************************************************************************************************************************/
 classifindApp.controller('searchResultsController', ['$scope', '$http', '$route', '$location', '$rootScope', 'timeAgo', function ($scope, $http, $route, $location, $rootScope, timeAgo) {
 	console.log("results controller loaded");
 	var oneDay = 60 * 60 * 24;
@@ -371,6 +427,9 @@ classifindApp.controller('searchResultsController', ['$scope', '$http', '$route'
 }]);
 
 
+/***************************************************************************************************************************
+ * 												  Listing Controller                                                       *
+ ***************************************************************************************************************************/
 classifindApp.controller('listingController', ['$scope', '$http', '$route', '$location', '$rootScope', '$cookieStore', function ($scope, $http, $route, $location, $rootScope, $cookieStore) {
 	console.log("listing controller loaded");
 	$scope.listingID = $rootScope.listingId;
@@ -440,11 +499,21 @@ classifindApp.controller('listingController', ['$scope', '$http', '$route', '$lo
 	}
 }]);
 
+
+/***************************************************************************************************************************
+ * 												Manage Job Controller                                                      *
+ ***************************************************************************************************************************/
 classifindApp.controller('manageJobController', ['$scope', '$route', '$http', '$location', '$rootScope', '$cookieStore', function ($scope, $route, $http, $location, $rootScope, $cookieStore) {
 	$scope.listingID = $rootScope.listingId;
 	$scope.acceptedBid = $rootScope.acceptedBidId;
 	$scope.$watch('$viewContentLoaded', function () {
-		$("#reviewRating").rating();
+		$('#starRating').rating({
+			min:0.5, 
+			max:5, 
+			step:0.5, 
+			size:'xs',
+			showClear: false
+		});
 		var endURL = apiIP + "jobs/managementInformation?jobId=" + $scope.listingID + "&bidId=" + $scope.acceptedBid;
 		console.log(endURL);
 		var response = $http.get(endURL);
@@ -466,8 +535,117 @@ classifindApp.controller('manageJobController', ['$scope', '$route', '$http', '$
 			console.log(status);
 		});
 	});
+	$scope.reviewProvider = function (jobId, requestorId, providerId) {
+		var dataObj = {
+			reviewComments: $scope.reviewComment,
+			reviewRating: $("#starRating").val(),
+			reviewType: "Provider",
+			reviewDate: new Date(),
+			reviewedJobId: jobId,
+			submittingUserId: requestorId,
+			receivingUserId: providerId
+		};
+
+		var endpointURL = apiIP + 'reviews';
+		var response = $http.post(endpointURL, dataObj);
+
+		response.success(function (data, status, headers, config) {
+			var dataObj2 = {
+				jobStatus: "Awaiting Review"
+			};
+	
+			endpointURL = apiIP + 'jobs/' + jobId;
+			response = $http.put(endpointURL, dataObj2);
+	
+			response.success(function (data, status, headers, config) {
+				$location.url('/dashboard');
+			});
+			response.error(function (data, status, headers, config) {
+				console.log(status);
+			});
+		});
+		response.error(function (data, status, headers, config) {
+			console.log(status);
+		});
+	}
 }]);
 
+
+/***************************************************************************************************************************
+ * 												Create Review Controller                                                   *
+ ***************************************************************************************************************************/
+classifindApp.controller('createReviewController', ['$scope', '$route', '$http', '$location', '$rootScope', '$cookieStore', function ($scope, $route, $http, $location, $rootScope, $cookieStore) {
+	$scope.listingID = $rootScope.listingId;
+	$scope.acceptedBid = $rootScope.acceptedBidId;
+	$scope.$watch('$viewContentLoaded', function () {
+		$('#starRating').rating({
+			min:0.5, 
+			max:5, 
+			step:0.5, 
+			size:'xs',
+			showClear: false
+		});
+		var endURL = apiIP + "jobs/managementInformation?jobId=" + $scope.listingID + "&bidId=" + $scope.acceptedBid;
+		console.log(endURL);
+		var response = $http.get(endURL);
+		response.success(function (data, status, headers, config) {
+			$scope.managementInformation = data.managementInformation;
+			$scope.acceptedBidList = data.managementInformation.submittedBids;
+
+			endURL = apiIP + "classifindUsers/" + data.managementInformation.requestorId;
+			console.log(endURL);
+			response = $http.get(endURL);
+			response.success(function (data, status, headers, config) {
+				$scope.requestorInfo = data;
+				console.log($scope.requestorInfo);
+			});
+			response.error(function (data, status, headers, config) {
+				console.log(status);
+			});
+		});
+		response.error(function (data, status, headers, config) {
+			console.log(status);
+		});
+	});
+	$scope.reviewProvider = function (jobId, requestorId, providerId) {
+		var dataObj = {
+			reviewComments: $scope.reviewComment,
+			reviewRating: $("#starRating").val(),
+			reviewType: "Requestor",
+			reviewDate: new Date(),
+			reviewedJobId: jobId,
+			submittingUserId: providerId,
+			receivingUserId: requestorId
+		};
+
+		var endpointURL = apiIP + 'reviews';
+		var response = $http.post(endpointURL, dataObj);
+
+		response.success(function (data, status, headers, config) {
+			var dataObj2 = {
+				jobStatus: "Completed"
+			};
+	
+			endpointURL = apiIP + 'jobs/' + jobId;
+			response = $http.put(endpointURL, dataObj2);
+	
+			response.success(function (data, status, headers, config) {
+				$location.url('/dashboard');
+			});
+			response.error(function (data, status, headers, config) {
+				console.log(status);
+			});
+		});
+		response.error(function (data, status, headers, config) {
+			console.log(status);
+		});
+	}
+}]);
+
+
+/***************************************************************************************************************************
+ * 										       Create Listing Controller                                                   *
+ ***************************************************************************************************************************/
 classifindApp.controller('createListingController', ['$scope', '$http', '$route', '$location', '$rootScope', '$cookieStore', function ($scope, $http, $route, $location, $rootScope, $cookieStore) {
 	console.log("create listing controller loaded");
 	var endpointURL = apiIP + 'classifindUsers/' + $cookieStore.get("userId");
@@ -511,6 +689,10 @@ classifindApp.controller('createListingController', ['$scope', '$http', '$route'
 	}
 }]);
 
+
+/***************************************************************************************************************************
+ * 												     Bid Controller                                                        *
+ ***************************************************************************************************************************/
 classifindApp.controller('bidController', ['$scope', '$http', '$route', '$location', '$rootScope', '$cookieStore', function ($scope, $http, $route, $location, $rootScope, $cookieStore) {
 	console.log("bid controller loaded");
 	$scope.listingID = $rootScope.listingId;
