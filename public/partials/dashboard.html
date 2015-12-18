@@ -19,17 +19,24 @@
 				<div class="row">
 					<div class="col-md-4" ng-repeat="job in jobs | startFrom:cPage*pSize | limitTo:pSize" ">
 						<div class="thumbnail ">
-							<img alt="Listing Picture " src="http://lorempixel.com/output/people-q-c-600-200-1.jpg " />
+							<img alt="Listing Picture " src="http://lorempixel.com/400/200/sports/ " />
 							<div class="caption ">
 								<h3>
-								{{ job.jobTitle }}
-							</h3>
+									{{ job.jobTitle }}
+								</h3>
 								<p>
-									{{ job.jobDescription }}
+									<span ng-show="job.jobStatus=='Completed' " class="btn btn-danger btn-xs ">COMPLETED</span>
+									<span ng-show="job.jobStatus=='Submitted' " class="btn btn-success btn-xs ">OPEN</span>
+									<span ng-show="job.jobStatus=='In Progress' " class="btn btn-warning btn-xs ">IN PROGRESS</span>
 								</p>
 								<p>
-									<a class="btn btn-primary " ng-click="viewListing(job.id) " href>View</a> 
-									<a class="btn " ng-click="deleteListing(job.id)" ng-confirm-click="You are about to delete your listing! Are you sure you want to do this?" href>Delete</a>
+									{{ job.jobDescription | limitTo:125 }}...	
+								</p>
+								<p>
+									<a class="btn btn-primary " ng-show="job.jobStatus=='In Progress' " ng-click="manageJob(job.id, job.acceptedBidId) " href>Manage</a> 
+									<a class="btn btn-primary " ng-show="job.jobStatus=='Submitted' " ng-click="viewListing(job.id) " href>View</a> 
+									<a class="btn " ng-show="job.jobStatus=='Submitted' " ng-click="deleteListing(job.id) " ng-confirm-click="You
+					are about to delete your listing! Are you sure you want to do this? " href>Delete</a>
 								</p>
 							</div>
 						</div>

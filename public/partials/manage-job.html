@@ -1,0 +1,70 @@
+<div class="wrap">
+	<div class="container">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="jumbotron">
+						<h2>
+							{{ managementInformation.jobTitle }}
+						</h2>
+						<p><span class="glyphicon glyphicon-map-marker"></span> {{ managementInformation.jobAddressStreet }}, {{ managementInformation.jobAddressCity }}, {{ managementInformation.jobAddressCountry }}, {{ managementInformation.jobAddressPostal }}</p>
+								<p>
+									{{ managementInformation.jobDescription }}
+								</p>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="thumbnail">
+								<img alt="Bootstrap Thumbnail First" src="http://lorempixel.com/g/400/400/sports" />
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="thumbnail">
+								<img alt="Bootstrap Thumbnail First" src="http://lorempixel.com/g/400/400/business" />
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="thumbnail">
+								<img alt="Bootstrap Thumbnail First" src="http://lorempixel.com/g/400/400/nightlife" />
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-8">
+							<h3>
+						Provider Information
+					</h3><img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/" />
+							<p>
+								<h2 class="text-left">{{ providerInfo.userFullName }}</h2>
+								<p><span class="glyphicon glyphicon-map-marker"></span> {{ providerInfo.userAddressStreet }}, {{ providerInfo.userAddressCity }},
+									{{ providerInfo.userAddressCountry }}, {{ providerInfo.userAddressPostal }}</p>
+								<p><span class="glyphicon glyphicon-earphone"></span> {{ providerInfo.userPhone }}</p>
+								<h3 class="text-success text-right" ng-repeat="bid in acceptedBidList">
+									{{ bid.bidPrice | currency }} <small>{{ bid.bidDate | date:'MM/dd/yyyy' }}</small>
+								</h3>
+							</p>
+							
+						</div>
+						<div class="col-md-4">
+							<h3>
+								Job Finished? Submit a review to close your listing! 
+							</h3>
+							<form role="form">
+								<div class="form-group">
+									<label for="comment">
+										Comment
+									</label>
+									<input type="text" class="form-control" id="comment" />
+								</div>
+								<input id="reviewRating" data-size="xs" data-show-clear="false" class="rating" data-min="0" data-max="5" data-step="0.5" required>
+								<button type="submit" class="btn btn-default">
+									Submit Review
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

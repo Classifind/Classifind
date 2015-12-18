@@ -7,7 +7,9 @@
 						<div class="col-md-8">
 							<div class="jumbotron listingBox">
 								<h3>
-								{{ listingInformation.jobTitle }}
+								{{ listingInformation.jobTitle }} <span ng-show="listingInformation.jobStatus=='Completed'" class="btn btn-danger btn-xs">COMPLETED</span>
+								<span ng-show="listingInformation.jobStatus=='Submitted'" class="btn btn-success btn-xs">OPEN</span>
+								<span ng-show="listingInformation.jobStatus=='In Progress'" class="btn btn-warning btn-xs">IN PROGRESS</span>
 							</h3>
 								<p><span class="glyphicon glyphicon-map-marker"></span> {{ listingInformation.jobAddressStreet }}, {{ listingInformation.jobAddressCity }}, {{ listingInformation.jobAddressCountry }}, {{ listingInformation.jobAddressPostal }}</p>
 								<p>
@@ -57,11 +59,14 @@
 									{{ bid.bidPrice | currency }} <small>{{ bid.bidDate | date:'MM/dd/yyyy' }}</small>
 								</h3>
 							</td>
+							<td class="col-md-2 text-right" ng-show="isOwner && listingInformation.jobStatus=='Submitted'">
+								<button class="btn btn-primary btn-lg" ng-click="accept(bid.id, bid.bidProvider.id)">Accept Bid</button>
+							</td>
 						</tr>
 					</table>
 				</div>
 			</div>
-			<div class="row listingButtons">
+			<div ng-hide="isOwner || listingInformation.jobStatus!='Submitted'" class="row listingButtons">
 				<div class="col-md-12">
 					<button class="btn btn-primary btn-lg" ng-click="newBid(listingID)">Submit New Bid</button>
 				</div>
