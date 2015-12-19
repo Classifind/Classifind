@@ -21,7 +21,8 @@
 						<div class="col-md-5">
 							<p>
 								<h3 class="text-left">{{ requestorInfo.userFullName }}</h3>
-								<img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/" /><br /><br />
+								<img class="profileAvatar" ng-show="requestorInfo.profilePic == null" alt="User Avatar" src="images/default_avatar.png" />
+                  				<img class="profileAvatar" ng-show="requestorInfo.profilePic != null" alt="User Avatar" src="{{ requestorInfo.profilePic }}" /><br /><br />
 								<p><span class="glyphicon glyphicon-map-marker"></span> {{ requestorInfo.userAddressStreet }}, {{ requestorInfo.userAddressCity }},
 									{{ requestorInfo.userAddressCountry }}, {{ requestorInfo.userAddressPostal }}</p>
 								<p><span class="glyphicon glyphicon-earphone"></span> {{ requestorInfo.userPhone }}</p>

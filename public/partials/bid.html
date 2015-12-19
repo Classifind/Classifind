@@ -21,22 +21,24 @@
 								</ul>
 								<div class="row">
 									<div class="col-md-12 requestorInfo">
-										<img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/people" class="img-circle requestorAvatar" />
+										 <img ng-show="requestorPicture == null" alt="User Avatar" src="images/default_avatar.png" class="img-circle requestorAvatar" />
+                       					 <img ng-show="requestorPicture != null" alt="User Avatar" src="{{ requestorPicture }}" class="img-circle requestorAvatar" />
 										<span class="requestorName">{{ requestor }}</span>
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="col-md-4">
-							<form role="form">
-								<div class="form-group">
-
+							<form role="form" name="bidForm" novalidate>
+								<div class="form-group" ng-class="{ 'has-error' : bidForm.bid.$invalid && !bidForm.bid.$pristine }">
 									<label for="bidPrice">
 										Offer
 									</label>
-									<input type="number" ng-model="bidPrice" class="form-control" id="bidPrice" />
+									<input type="number" ng-model="bidPrice" name="bid" class="form-control" id="bidPrice" ng-minlength="1" required/>
+                                    
+                                    <p ng-show="bidForm.bid.$invalid && !bidForm.bid.$pristine" class="help-block">Enter valid bid.</p>
 								</div>
-								<button type="submit" class="btn btn-default" ng-click="placeBid()">
+								<button type="submit" class="btn btn-default" ng-disabled="bidForm.$invalid" ng-click="placeBid()">
 									Submit
 								</button>
 							</form>

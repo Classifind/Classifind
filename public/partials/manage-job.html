@@ -19,10 +19,12 @@
 						<div class="col-md-5">
 							<p>
 								<h3 class="text-left">{{ providerInfo.userFullName }}</h3>
-								<img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/" />
+								<img class="profileAvatar" ng-show="providerInfo.profilePic == null" alt="User Avatar" src="images/default_avatar.png" />
+                				<img class="profileAvatar" ng-show="providerInfo.profilePic != null" alt="User Avatar" src="{{ providerInfo.profilePic }}" />
 								<br /><br />
 								<p><span class="glyphicon glyphicon-map-marker"></span> {{ providerInfo.userAddressStreet }}, {{ providerInfo.userAddressCity }},
 									{{ providerInfo.userAddressCountry }}, {{ providerInfo.userAddressPostal }}</p>
+								<p><span class="glyphicon glyphicon-envelope"></span> {{ providerInfo.email }}</p>
 								<p><span class="glyphicon glyphicon-earphone"></span> {{ providerInfo.userPhone }}</p>
 								<h3 class="text-success text-left" ng-repeat="bid in acceptedBidList">
 									{{ bid.bidPrice | currency }} <small>{{ bid.bidDate | date:'MM/dd/yyyy' }}</small>

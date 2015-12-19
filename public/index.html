@@ -2,6 +2,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Classifind</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css'>
 	<link rel="stylesheet" href="_css/bootstrap.min.css" />
 	<link rel="stylesheet" href="_css/nav.css" />
@@ -17,7 +18,7 @@
 <body ng-app="classifindApp">
 	<div id='main'>
 		<nav class="navbar navbar-inverse" ng-controller="loginController">
-			<div class="container">
+			<div class="container nav-container">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-2">
@@ -31,10 +32,10 @@
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="navbar-collapse-2">
-					<ul class="nav navbar-nav navbar-right">
-						<li ng-show="loggedIn"><a href ng-click="profile()"><span class="glyphicon glyphicon-user icon"></span><br class="iconline">Dashboard</a></li>
-						<li><a href ng-click="getJobs()"><span class="glyphicon glyphicon-pushpin icon"></span><br class="iconline">Listings</a></li>
-						<li><a href="#search"><span class="glyphicon glyphicon-search icon"></span><br class="iconline">Search</a></li>
+					<ul class="nav navbar-nav navbar-right" id="mainmenu">
+						<li class="navmenu" ng-show="loggedIn"><a href ng-click="profile()"><span class="glyphicon glyphicon-user icon mobile"></span><br class="iconline mobile">Dashboard</a></li>
+						<li class="navmenu"><a href ng-click="getJobs()"><span class="glyphicon glyphicon-pushpin icon mobile"></span><br class="iconline mobile">Listings</a></li>
+						<li class="navmenu"><a href="#search"><span class="glyphicon glyphicon-search icon mobile"></span><br class="iconline mobile">Search</a></li>
 						<li>
 							<a class="btn btn-default btn-outline btn-circle collapsed" data-toggle="collapse" href="#login-collapse" id="loginToggle"
 							aria-expanded="false" aria-controls="login-collapse"><span ng-show="loggedOut">Sign in</span><span ng-show="loggedIn">Account</span></a>
@@ -50,8 +51,8 @@
 								<label class="sr-only" for="Password">Password</label>
 								<input type="password" class="form-control" id="Password" placeholder="Password" ng-model="userPassword" required />
 							</div>
-							<button type="submit" class="btn btn-primary" ng-click="login()">GO</button>
-							<button type="button" class="btn btn-primary" ng-click="register()">Register</button>
+							<button type="submit" class="btn btn-primary menubutton" ng-click="login()">GO</button>
+							<button type="button" class="btn btn-primary menubutton" ng-click="register()">Register</button>
 						</form>
 						<form class="navbar-form navbar-right form-inline" role="form" ng-show="loggedIn">
 							<div class="form-group">
@@ -90,6 +91,9 @@
 	<script src="_js/angular-timeago.js"></script>
 	<script src="_js/angular-tags.min.js"></script>
 	<script src="_js/angular-messages.min.js"></script>
+	<script src="_js/angular-file-upload.js"></script>
+	<script src="_js/ng-file-upload-shim.js"></script>
+	<script src="_js/ng-image-crop.js"></script>
 	<script src="_js/bootstrap.min.js"></script>
 	<script src="_js/nav.js"></script>
 	<script src="_js/star-rating.js"></script>

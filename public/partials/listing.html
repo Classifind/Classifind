@@ -25,7 +25,8 @@
 								</p>
 							<div class="row">
 								<div class="col-md-12 requestorInfo">
-									<img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/people" class="img-circle requestorAvatar" />
+									 <img ng-show="requestorPicture == null" alt="User Avatar" src="images/default_avatar.png" class="img-circle requestorAvatar" />
+                       				 <img ng-show="requestorPicture != null" alt="User Avatar" src="{{ requestorPicture }}" class="img-circle requestorAvatar" />
 									<a href ng-click="getProfile(listingInformation.requestorId)"><span class="requestorName">{{ requestor }}</span></a>
 								</div>
 							</div>
@@ -34,15 +35,9 @@
 						<div class="col-md-4">
 							<div class="row">
 								<div class="col-md-12">
-									<img alt="Bootstrap Image Preview" src="http://lorempixel.com/420/420/abstract" class="img-thumbnail thumbLarge" />
+									<img ng-show="listingInformation.jobImage == null" src="images/default_picture.png" class="img-thumbnail thumbLarge" />
+									<img ng-show="listingInformation.jobImage != null" src="{{ listingInformation.jobImage }}" class="img-thumbnail thumbLarge" />
 								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-12 thumbs">
-									<img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/sports" class="img-thumbnail thumbSmall" />
-									<img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/business" class="img-thumbnail thumbSmall" />
-									<img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/nightlife" class="img-thumbnail thumbSmall" />
-								</div>	
 							</div>
 						</div>
 					</div>
@@ -52,10 +47,17 @@
 				<div class="col-md-12">
 					<table class="table table-striped pastBids">
 						<tr ng-repeat="bid in bidList | orderBy: 'bidPrice'">
+							<td class="bidImage">
+									<img ng-show="bid.bidProvider.profilePic == null" alt="User Avatar" src="images/default_avatar.png" class="img-circle requestorAvatar" />
+                      				 <img ng-show="bid.bidProvider.profilePic != null" alt="User Avatar" src="{{ bid.bidProvider.profilePic }}" class="img-circle requestorAvatar" />
+							</td>
 							<td>
 								<h3>
-									<img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/people" class="img-circle requestorAvatar" /><a href ng-click="getProfile(bid.bidProvider.id)"><span class="bidderName">{{ bid.bidProvider.userFullName }}</span></a>
+									 <a href ng-click="getProfile(bid.bidProvider.id)"><span class="bidderName">{{ bid.bidProvider.userFullName }}</span></a>
 								</h3>
+							</td>
+							<td ng-show="bid.bidProviderAvg > 0">
+								<star-rating ng-model="bid.bidProviderAvg" readonly="isRatingReadonly"></star-rating> ({{ reviewNum }} reviews)
 							</td>
 							<td>
 								<h3 class="text-success text-right">
@@ -69,7 +71,7 @@
 					</table>
 				</div>
 			</div>
-			<div ng-hide="isOwner || listingInformation.jobStatus!='Submitted'" class="row listingButtons">
+			<div ng-hide="isOwner || listingInformation.jobStatus!='Submitted' || loggedIn != 'true'" class="row listingButtons">
 				<div class="col-md-12">
 					<button class="btn btn-primary btn-lg" ng-click="newBid(listingID)">Submit New Bid</button>
 				</div>

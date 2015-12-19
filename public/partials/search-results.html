@@ -8,7 +8,8 @@
         <section class="col-xs-12 col-sm-6 col-md-12">
             <article class="search-result row" ng-repeat="r in searchResults | orderBy: '-jobPostingDate'">
                 <div class="col-xs-12 col-sm-12 col-md-3">
-                    <a href="#" title="Lorem ipsum" class="thumbnail"><img class="searchPicture" src="http://lorempixel.com/g/244/137/" alt="picture" /></a>
+                    <a href="#" title="Lorem ipsum" class="thumbnail"><img ng-show="r.jobImage == null" src="images/default_picture.png" class="searchPicture" />
+			   <img ng-show="r.jobImage != null" src="{{ r.jobImage }}" class="searchPicture" /></a>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-2">
                     <ul class="meta-search">

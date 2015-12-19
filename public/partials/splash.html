@@ -43,9 +43,10 @@
 
 <div class="container">
 	<div class="page-header">
-		<h3>Getting started has never been simpler!</h3>
+		<h3 ng-hide="loggedIn == 'true' && suggested.length > 0">Getting started has never been simpler!</h3>
+		<h3 ng-show="loggedIn == 'true' && suggested.length > 0">Jobs you might be interested in:</h3>
 	</div>
-	<div class="row grid-divider">
+	<div class="row grid-divider" ng-hide="loggedIn == 'true' && suggested.length > 0">
 		<div class="col-sm-4">
 			<div class="col-padding">
 				<h3>Step 1</h3>
@@ -62,6 +63,19 @@
 			<div class="col-padding">
 				<h3>Step 3</h3>
 				<p>Find a job specialist for the task. You can browse through the job specialists in your area or await a specialist to bid on your job. Since all job specialists have past job reviews available to view on their profile, you can make sure you find the right person for the job. Once the job has been accepted by both parties, all you need to do is wait for the job to get done.</p>
+			</div>
+		</div>
+	</div>
+	<div class="row grid-divider" ng-show="loggedIn == 'true' && suggested.length > 0">
+		<div class="col-sm-4 suggestedJobs" ng-repeat="job in suggested | limitTo:3">
+			<div class="col-padding">
+				<p><div class="pictureBox"><img ng-show="job.jobImage == null" src="images/default_picture.png" class="jobPicture img-thumbnail thumbLarge" />
+									<img ng-show="job.jobImage != null" src="{{ job.jobImage }}" class="jobPicture img-thumbnail thumbLarge" /></div></p>
+				<h3>{{ job.jobTitle }}</h3>
+				<p>{{ job.jobDescription | limitTo:125 }}...</p>
+				<br />
+				<p><small>Based on your <strong>"{{ job.skillName }}"</strong> skill</small></p>
+				<a class="btn btn-primary " ng-click="viewListing(job.id)" href>View</a> 
 			</div>
 		</div>
 	</div>

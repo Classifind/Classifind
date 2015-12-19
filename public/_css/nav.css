@@ -113,14 +113,10 @@ text-align: center;
     transform: translate(0px,0px);
 }
 
-
 #logo {
 	height: 100%;
 }
 
-.navbar .navbar-toggle {
-	margin-top: 12px;
-}
 
 .welcome-message {
     color: white;
@@ -142,20 +138,7 @@ text-align: center;
 	}
 	
 	.navbar .navbar-collapse .navbar-right > li:last-child a { text-align: center; }
-	.navbar { min-height: 150px; }
-	.navbar-brand { height: 150px; }
 	.navbar-nav.navbar-right li a {
 		font-size: 18px;
-	}
-	.navbar-toggle .icon-bar+.icon-bar {
-	    margin-top: 14px;
-	}
-	.navbar-toggle .icon-bar {
-	    width: 98px;
-	    height: 13px;
-	    border-radius: 5px;
-	}
-	.navbar-toggle {
-	    min-height: 120px;
 	}
 }

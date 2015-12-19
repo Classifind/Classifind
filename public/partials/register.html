@@ -2,8 +2,8 @@
 	<div class="container">
 		<form name="registration" ng-submit="submitForm(registration.$valid)" enctype="multipart/form-data" novalidate>
 			<div class="row">
-				<div class="col-xs-12 col-sm-6 col-md-8">
-					<div class="panel panel-default">
+				<div class="col-xs-12 col-sm-6 col-md-6">
+					<div class="panel panel-default panelTop">
 						<div class="panel-heading"><strong>Account Information</strong></div>
 						<div class="panel-body">
 							<div class="form-group" ng-class="{ 'has-error' : registration.userFullName.$invalid && !registration.userFullName.$pristine }">
@@ -45,13 +45,34 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-xs-6 col-md-4">
-					<div class="panel panel-default">
+				<div class="col-xs-12 col-md-6">
+					<div class="panel panel-default panelTop">
 						<div class="panel-heading"><strong>Avatar</strong></div>
 						<div class="panel-body">
-							<div id="kv-avatar-errors" class="center-block" style="width:800px;display:none"></div>
-							<div class="kv-avatar center-block" style="width:200px">
-								<input id="avatar" name="avatar" type="file" class="file-loading">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="btn btn-primary" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="5MB" ngf-min-height="100">Select an Image</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+								</div>
+								<div class="col-md-6">
+									<small>Preview:</small>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div ng-model="file" ngf-pattern="image/*" class="cropArea pull-right">
+										<img-crop image="file  | ngfDataUrl" result-image="croppedDataUrl" ng-init="croppedDataUrl=''">
+										</img-crop>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div>
+										<img ng-src="{{croppedDataUrl}}" />
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -129,7 +150,6 @@
 					</div>
 				</div>
 			</div>
-
 			
 			<button type="submit" class="btn btn-lg btn-primary btn-block" id="js-listing-submit" ng-disabled="registration.$invalid" ng-click="registerUser()">Create Account</button>
 		</form>
